@@ -1,6 +1,5 @@
 import Navigation from "./Navigation"
 
-
 const Header = () => {
     return (
         <header>

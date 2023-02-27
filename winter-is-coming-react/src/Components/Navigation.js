@@ -16,7 +16,7 @@ const Navigation = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <a className="navbar-brand mt-2 mt-lg-0" href="#">
                         <img
-                            src="\ms-icon-310x310.png"
+                            src="\images\ms-icon-310x310.png"
                             height="40"
                             alt="MDB Logo"
                             loading="lazy"
