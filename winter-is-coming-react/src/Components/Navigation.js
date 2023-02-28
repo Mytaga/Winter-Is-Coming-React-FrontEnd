@@ -16,9 +16,10 @@ const Navigation = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <a className="navbar-brand mt-2 mt-lg-0" href="#">
                         <img
-                            src="\images\ms-icon-310x310.png"
+                            src="\images\logo.jpg"
                             height="40"
-                            alt="MDB Logo"
+                            width="80"
+                            alt="WIC"
                             loading="lazy"
                         />
                     </a>
@@ -29,10 +30,14 @@ const Navigation = () => {
                         <li className="nav-item">
                             <a className="nav-link" href="#">My Resorts</a>
                         </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Top Resorts</a>
+                        </li>
                     </ul>
                 </div>
                 <div className="d-flex align-items-center">
                     <a className="nav-link" href="#">Login</a>
+                    <a className="nav-link" href="#">Register</a>
                     <div className="dropdown">
                         <a
                             className="dropdown-toggle d-flex align-items-center hidden-arrow"
