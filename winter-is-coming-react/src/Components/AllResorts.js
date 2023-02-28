@@ -2,21 +2,24 @@ import { useEffect, useState } from "react";
 import getAllResorts from '../services/fetch-data';
 import Resort from "./Resort";
 
+const host = 'https://localhost:5001/api/Resort/GetAll';
+
 async function AllResorts() {
-    const resorts = getAllResorts();
     
-    this.setState({resorts});
+    const[resorts, setResorts] = useState([]);
     
+    useEffect( () =>{
+        fetch(host)
+        .then(res => res.json())
+        .then(resortData => {
+            console.log(resortData);
+            setResorts(resortData);
+        });
+    }, []);
+
     return (
         <div className="row row-cols-1 row-cols-md-3 g-4">
-            {this.state.resorts.map((r) => (<Resort
-                key={r.id}
-                name={r.name}
-                elevation={r.elevation}
-                image={r.imageUrl}
-                likes={r.likes}
-                country={r.countryName}
-            />))}
+            {resorts.map((resort) => (<Resort key={resort.id} {...resort}/>))}
         </div>);
 }
 
