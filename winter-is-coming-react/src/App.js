@@ -1,13 +1,17 @@
 import './App.css';
-import AllResorts from './Components/AllResorts';
+import Resorts from './Components/Resorts/Resorts';
 import Header from './Components/Header';
-import HomePage from './Components/HomePage';
+import { Route, Routes } from "react-router-dom";
+import Home from './Components/Home';
 
 function App() {
   return (
     <div>
       <Header />
-      <AllResorts/>
+      <Routes>
+        <Route exact path="/" element={<Home />}/>
+        <Route path="/resorts" element={<Resorts/>}/>
+      </Routes>
     </div>
   );
 }

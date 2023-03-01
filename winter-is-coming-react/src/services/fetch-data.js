@@ -1,9 +1,10 @@
-const host = 'https://localhost:5001/api/Resort/GetAll';
+const apiUrl = 'https://localhost:5001/api/Resort/GetAll';
 
-async function getAllResorts() {
-    fetch(host)
-    .then(res => res.json())
-    .catch(error => console.log(error))
+const getData = () => {
+    return fetch(apiUrl)
+        .then(res => res.json())
+        .then(data => data.resorts)
+        .catch(error => console.error(error))
 };
 
-export default getAllResorts;
+export default getData;

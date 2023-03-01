@@ -14,7 +14,7 @@ const Navigation = () => {
                     <i className="fas fa-bars"></i>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <a className="navbar-brand mt-2 mt-lg-0" href="#">
+                    <a className="navbar-brand mt-2 mt-lg-0" href="/">
                         <img
                             src="\images\logo.jpg"
                             height="40"
@@ -25,7 +25,7 @@ const Navigation = () => {
                     </a>
                     <ul className="navbar-nav mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="#">All Resorts</a>
+                            <a className="nav-link" href="/resorts">All Resorts</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">My Resorts</a>
