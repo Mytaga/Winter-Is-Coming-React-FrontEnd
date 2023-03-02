@@ -6,7 +6,7 @@ const HomePage = () => {
                     <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-white">
                             <h1 className="mb-3">Winter is coming so prepare yourself....</h1>
-                            <h5 className="mb-4">Get the latest info abour resorts around Europe</h5>
+                            <h5 className="mb-4">Get the latest info about resorts around Europe</h5>
                             <a
                                 className="btn btn-outline-light btn-lg m-2"
                                 role="button"
@@ -17,7 +17,7 @@ const HomePage = () => {
                                 className="btn btn-outline-light btn-lg m-2"
                                 target="_blank"
                                 role="button">
-                                Don't have an acconnt ? Sign up now</a >
+                                Sign up now</a >
                         </div>
                     </div>
                 </div>
