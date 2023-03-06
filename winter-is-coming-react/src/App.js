@@ -35,7 +35,7 @@ function App() {
               .indexOf(query.toLowerCase()) > -1
           )
         })
-      } else if (filterParam === "All") {
+      } else {
         return searchParam.some((newResort) => {
           return (
             resort[newResort]
