@@ -45,7 +45,7 @@ const Navigation = () => {
                             role="button"
                             data-mdb-toggle="dropdown"
                             aria-expanded="false"
-                            href="/profile"My profile
+                            href="/profile"
                         >
                             <img
                                 src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"

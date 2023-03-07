@@ -1,20 +1,20 @@
 import './App.css';
-import Resorts from './Components/Resorts/Resorts';
-import Header from './Components/Header';
+import Resorts from './components/Resorts/Resorts';
+import Header from './components/Header';
 import { Route, Routes } from "react-router-dom";
-import Home from './Components/Home';
+import Home from './components/Home';
 import { Fragment } from 'react';
 import * as resortService from './services/resortService';
 import { useEffect, useState } from "react";
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
 
   const [resorts, setResorts] = useState([]);
-  const [query, setQuery] = useState("");
-  const [searchParam] = useState(["countryName"]);
-  const [filterParam, setFilterParam] = useState(["All"]);
+  // const [query, setQuery] = useState("");
+  // const [searchParam] = useState(["countryName"]);
+  // const [filterParam, setFilterParam] = useState(["All"]);
 
   useEffect(() => {
     resortService.getResorts()
@@ -24,28 +24,40 @@ function App() {
       .catch(error => console.log(error))
   }, []);
 
-  function filter(resorts) {
-    return resorts.filter((resort) => {
-      if (resort.countryName === filterParam) {
-        return searchParam.some((newResort) => {
-          return (
-            resort[newResort]
-              .toString()
-              .toLowerCase()
-              .indexOf(query.toLowerCase()) > -1
-          )
-        })
-      } else {
-        return searchParam.some((newResort) => {
-          return (
-            resort[newResort]
-              .toString()
-              .toLowerCase()
-              .indexOf(query.toLowerCase()) > -1
-          )
-        })
-      }
-    })
+  // function filter(resorts) {
+  //   return resorts.filter((resort) => {
+  //     if (resort.countryName === filterParam) {
+  //       return searchParam.some((newResort) => {
+  //         return (
+  //           resort[newResort]
+  //             .toString()
+  //             .toLowerCase()
+  //             .indexOf(query.toLowerCase()) > -1
+  //         )
+  //       })
+  //     } else {
+  //       return searchParam.some((newResort) => {
+  //         return (
+  //           resort[newResort]
+  //             .toString()
+  //             .toLowerCase()
+  //             .indexOf(query.toLowerCase()) > -1
+  //         )
+  //       })
+  //     }
+  //   })
+  // }
+
+  const onResortFilterSubmit = async (e) =>{
+    e.preventDefault();
+
+      const formData = new FormData(e.currentTarget);
+      const searchQuery = formData.search;
+      const country = formData.country;
+      console.log(searchQuery);
+      console.log(country);
+      const filtered = await resortService.getFilteredResorts(searchQuery, country);
+      setResorts(filtered);
   }
 
   return (
@@ -58,10 +70,7 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/resorts" element={<Resorts
             resorts={resorts}
-            filter={filter}
-            query={query}
-            setQuery={setQuery}
-            setFilterParam={setFilterParam} />} />        
+            onResortFilterSubmit={onResortFilterSubmit} />} />        
         </Routes>
       </main>
     </Fragment>
