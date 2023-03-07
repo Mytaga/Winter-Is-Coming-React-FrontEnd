@@ -15,7 +15,7 @@ export function QueryForm(
     }, []);
 
     return (
-        <form method="get" onSubmit={ (e) => onResortFilterSubmit(e)}>
+        <form onSubmit={ (e) => onResortFilterSubmit(e)}>
             <div className={styles['row']}>
                 <div className="form-group col-md-3 d-flex justify-content-between">
                     <div className={styles['form-group']}>
@@ -27,8 +27,8 @@ export function QueryForm(
                     </div>
                 </div>
                 <div className="form-group col-md-3">
-                    <label htmlFor="search">Search</label>
-                    <input id="search" name="search" className="form-control" placeholder="Search by name"></input>
+                    <label htmlFor="searchQuery">Search</label>
+                    <input id="searchQuery" name="searchQuery" className="form-control" placeholder="Search by name"></input>
                 </div>
                 <div className="col-md-3">
                     <div className="form-group mt-4 p-2">

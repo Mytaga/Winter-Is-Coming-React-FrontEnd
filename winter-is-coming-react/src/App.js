@@ -48,16 +48,17 @@ function App() {
   //   })
   // }
 
-  const onResortFilterSubmit = async (e) =>{
+  const onResortFilterSubmit = async (e) => {
+
     e.preventDefault();
 
-      const formData = new FormData(e.currentTarget);
-      const searchQuery = formData.search;
-      const country = formData.country;
-      console.log(searchQuery);
-      console.log(country);
-      const filtered = await resortService.getFilteredResorts(searchQuery, country);
-      setResorts(filtered);
+    const formData = new FormData(e.currentTarget);
+    const searchQuery = formData.search;
+    const country = formData.country;
+
+    const filtered = await resortService.getFilteredResorts(searchQuery, country);
+    console.log(filtered);
+    setResorts(filtered);
   }
 
   return (
@@ -67,10 +68,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register/>} />
+          <Route path="/register" element={<Register />} />
           <Route path="/resorts" element={<Resorts
             resorts={resorts}
-            onResortFilterSubmit={onResortFilterSubmit} />} />        
+            onResortFilterSubmit={onResortFilterSubmit} />} />
         </Routes>
       </main>
     </Fragment>
