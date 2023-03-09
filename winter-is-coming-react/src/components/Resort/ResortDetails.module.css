@@ -1,0 +1,22 @@
+.content{
+    padding: 30px;
+    background-color:  #e3f2fd;
+}
+
+.body{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.table {
+    margin-top: 30px;
+    width: 700px;
+}
+
+.button{
+    margin-top:20px;
+}
+
+.footer{
+    justify-content: flex-start;
+}
