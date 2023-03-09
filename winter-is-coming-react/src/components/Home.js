@@ -9,13 +9,10 @@ const Home = () => {
                             <a
                                 className="btn btn-outline-light btn-lg m-2"
                                 role="button"
-                                rel="nofollow"
-                                href="/login"
-                                target="_blank">
+                                href="/login">
                                 Login to explore</a>
                             <a
                                 className="btn btn-outline-light btn-lg m-2"
-                                target="_blank"
                                 href="/register"
                                 role="button">
                                 Sign up now</a >

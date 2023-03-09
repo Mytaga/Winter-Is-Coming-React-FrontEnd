@@ -2,7 +2,6 @@ import Resort from "../Resort/Resort";
 import styles from "./Resorts.module.css";
 import { QueryForm } from "../QueryForm/QueryForm";
 
-
 function Resorts({
     resorts,
     onResortFilterSubmit

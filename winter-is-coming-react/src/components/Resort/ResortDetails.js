@@ -26,7 +26,7 @@ function ResortDetails({
                         <p>NUMBER OF SLOPES: <strong>{numberOfSlopes}</strong></p>
                         <p>SKI AREA: <strong>{skiAreaSize} km</strong></p>
                         <p>LIKES: <strong>{likes}</strong></p>
-                        <table class={`${styles['table']} table table-sm`}>
+                        <table className={`${styles['table']} table table-sm`}>
                             <thead>
                                 <tr>
                                     <th scope="col">Card Type</th>

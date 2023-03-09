@@ -1,17 +1,26 @@
 .card {
-    width:485px;
+    width:450px;
+}
+
+.img {
+    width: auto;
+    height: 300px;
+}
+
+
+.title{
+    margin-bottom: 20px;
     text-transform: uppercase;
 }
 
-.card-img-top {
-    width: auto;
-    height: 300px;
+.body {
+    text-transform: uppercase;
 }
 
 .details-btn {
     border-style: none;
     background-color: #e3f2fd;
-    padding: 5px 10px;
+    padding: 5px 20px;
     border-radius: 6px;
     font-size: 16px;
     font-weight: bold;
@@ -26,5 +35,21 @@
     margin-left: 5px;
     font-size: 16px;
     font-weight: bold;
+    text-transform: uppercase;
+}
+
+.comment-btn {
+    border-style: none;
+    background-color: #e3f2fd;
+    padding: 5px 20px;
+    border-radius: 6px;
+    margin-left: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.footer {
+    font-size: 20px;
     text-transform: uppercase;
 }

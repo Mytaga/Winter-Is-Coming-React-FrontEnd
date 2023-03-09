@@ -23,24 +23,27 @@ function Resort({
     };
 
     return (
-        <div className={`${styles['card']} card h-100`}>
-            <img src={imageUrl} className={styles['card-img-top']} alt="resort" />
-            <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                <p >
-                    <strong>Country:</strong> {countryName}
-                </p>
-                <p className="card-text">
-                    <strong>Elevation:</strong> {elevation}
-                </p>
-                <div >
-                    <button onClick={() => onDetailsClick(id)} className={styles['details-btn']} data-mdb-toggle="modal" data-mdb-target="#detailsModal">Details</button>
-                    {resort && <ResortDetails {...resort} onClose={onClose}/>}
-                    <button className={styles['like-btn']}>Like</button>
+        <div className={`${styles['card']} col`}>
+            <div className="card h-100">
+                <img src={imageUrl} className={`${styles['img']} card-img-top`} alt="resort" />
+                <div className={`${styles['body']} card-body`}>
+                    <h5 className={`${styles['title']} card-title`}>{name}</h5>
+                    <p >
+                        <strong>Country:</strong> {countryName}
+                    </p>
+                    <p className="card-text">
+                        <strong>Elevation:</strong> {elevation}m
+                    </p>
+                    <div >
+                        <button onClick={() => onDetailsClick(id)} className={styles['details-btn']} data-mdb-toggle="modal" data-mdb-target="#detailsModal"><i class="fas fa-info-circle"></i> </button>
+                        {resort && <ResortDetails {...resort} onClose={onClose} />}
+                        <button className={styles['like-btn']}><i class="fas fa-heart"></i></button>
+                        <button className={styles['comment-btn']}><i class="fas fa-comment"></i></button>
+                    </div>
                 </div>
-            </div>
-            <div className="card-footer">
-                <small className="text-muted"><strong>Total Likes:</strong> {likes}</small>
+                <div className={`${styles['footer']} card-footer`}>
+                    <small className="text-muted"><strong>Likes:</strong> {likes}</small>
+                </div>
             </div>
         </div>
     );
