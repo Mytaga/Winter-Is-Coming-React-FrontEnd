@@ -27,7 +27,7 @@ export function QueryForm(
                     </div>
                 </div>
                 <div className="form-group col-md-3">
-                    <label htmlFor="searchQuery"><i class="fas fa-search"></i></label>
+                    <label htmlFor="searchQuery"><i className="fas fa-search"></i></label>
                     <input id="searchQuery" name="searchQuery" className="form-control" placeholder="Search by name"></input>
                 </div>
                 <div className="col-md-3">

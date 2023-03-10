@@ -35,10 +35,10 @@ function Resort({
                         <strong>Elevation:</strong> {elevation}m
                     </p>
                     <div >
-                        <button onClick={() => onDetailsClick(id)} className={styles['details-btn']} data-mdb-toggle="modal" data-mdb-target="#detailsModal"><i class="fas fa-info-circle"></i> </button>
+                        <button onClick={() => onDetailsClick(id)} className={styles['details-btn']} data-mdb-toggle="modal" data-mdb-target="#detailsModal"><i className="fas fa-info-circle"></i> </button>
                         {resort && <ResortDetails {...resort} onClose={onClose} />}
-                        <button className={styles['like-btn']}><i class="fas fa-heart"></i></button>
-                        <button className={styles['comment-btn']}><i class="fas fa-comment"></i></button>
+                        <button className={styles['like-btn']}><i className="fas fa-heart"></i></button>
+                        <button className={styles['comment-btn']}><i className="fas fa-comment"></i></button>
                     </div>
                 </div>
                 <div className={`${styles['footer']} card-footer`}>

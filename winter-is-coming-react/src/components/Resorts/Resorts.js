@@ -1,18 +1,49 @@
 import Resort from "../Resort/Resort";
 import styles from "./Resorts.module.css";
 import { QueryForm } from "../QueryForm/QueryForm";
+import { useState } from "react";
+import ResortCreate from "../Resort/ResortCreate";
 
 function Resorts({
     resorts,
-    onResortFilterSubmit
+    formValues,
+    formErrors,
+    onResortFilterSubmit,
+    onResortCreateSubmit,
+    formChangeHandler,
+    formValidate,
 }) {
+
+    const [showAddResort, setShowAddResort] = useState(false);
+
+    const onClose = () => {
+        setShowAddResort(false);
+    };
+
+    const onResortAddClick = () => {
+        setShowAddResort(true);
+    };
 
     const onResortFilterSubmitHandler = (e) => {
         onResortFilterSubmit(e);
     }
 
+    const onResortCreateSubmitHandler = (e) => {
+        onResortCreateSubmit(e);
+        setShowAddResort(false);
+    };
+
     return (
             <div>
+                {showAddResort && <ResortCreate
+                onClose={onClose}
+                onResortCreateSubmit={onResortCreateSubmitHandler}
+                formValues={formValues}
+                formErrors={formErrors}
+                formChangeHandler={formChangeHandler}
+                formValidate={formValidate}
+                />}
+                
                 <div className={styles['query-options']}>
                     <QueryForm onResortFilterSubmit={onResortFilterSubmitHandler} />
                 </div>
@@ -24,6 +55,7 @@ function Resorts({
                         />
                     ))}
                 </div>
+                <button className="btn-add btn" onClick={onResortAddClick}>Add new resort</button>
             </div>
     );
 }
