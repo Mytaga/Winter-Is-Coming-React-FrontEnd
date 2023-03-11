@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react";
+import { getCountries } from "../../services/resortService";
+import  styles  from "../Resort/Resort.module.css";
+
 function ResortCreate({
     onClose,
     onResortCreateSubmit,
@@ -6,183 +10,151 @@ function ResortCreate({
     formChangeHandler,
     formValidate,
 }) {
+
+    const [state, setState] = useState({ data: [], isLoading: false });
+
+    useEffect(() => {
+        setState((state) => ({ ...state, isLoading: true }));
+        getCountries().then((data) => {
+            setState((state) => ({ ...state, data, isLoading: false }));
+        });
+    }, []);
+
     return (
-        <div className="overlay">
-            <div className="backdrop"></div>
-            <div className="modal">
-                <div className="user-container">
-                    <header className="headers">
-                        <h2>Add Resort</h2>
-                        <button className="btn close" onClick={onClose}>
-                            <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
-                                className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                                <path fill="currentColor"
-                                    d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z">
-                                </path>
-                            </svg>
-                        </button>
-                    </header>
-                    <form onSubmit={(e) => onResortCreateSubmit(e)}>
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="name">Name</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-user"></i></span>
-                                    <input
+        <div className="backdrop">
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog modal-lg">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel">Create Resort</h5>
+                            <button type="button" onClick={onClose} className="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className={`${styles['body']} modal-body`}>
+                            <form onSubmit={(e) => onResortCreateSubmit(e)}>
+                                <div className="form-outline">
+                                    <input className="form-control"
                                         id="name"
                                         name="name"
                                         type="text"
                                         value={formValues.name}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.name ? { borderColor: "red" } : {}}
                                     />
+                                    <label className="form-label" htmlFor="name">Name</label>
+                                    {formErrors.name &&
+                                        <p className="form-error">
+                                            {formErrors.name}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.name &&
-                                    <p className="form-error">
-                                        {formErrors.name}
-                                    </p>
-                                }
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="elevation">Elevation</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-user"></i></span>
-                                    <input
+                                <div className="form-outline">
+                                    <input className="form-control"
                                         id="elevation"
                                         name="elevation"
                                         type="text"
                                         value={formValues.elevation}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.elevation ? { borderColor: "red" } : {}}
                                     />
+                                    <label className="form-label" htmlFor="name">Elevation</label>
+                                    {formErrors.elevation &&
+                                        <p className="form-error">
+                                            {formErrors.elevation}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.elevation &&
-                                    <p className="form-error">
-                                        {formErrors.elevation}
-                                    </p>
-                                }
-                            </div>
-                        </div>
-
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-envelope"></i></span>
-                                    <input
+                                <div className="form-outline">
+                                    <textarea className="form-control"
                                         id="description"
                                         name="description"
-                                        type="text"
+                                        type="text-area"
+                                        rows="4"
                                         value={formValues.description}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.description ? { borderColor: "red" } : {}}
                                     />
+                                    <label className="form-label" htmlFor="description">Description</label>
+                                    {formErrors.description &&
+                                        <p className="form-error">
+                                            {formErrors.description}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.description &&
-                                    <p className="form-error">
-                                        {formErrors.description}
-                                    </p>
-                                }
-                            </div>
-                            <div className="form-group long-line">
-                                <label htmlFor="imageUrl">Image Url</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-phone"></i></span>
-                                    <input
+                                <div className="form-outline">
+                                    <input className="form-control"
                                         id="imageUrl"
-                                        name="imageUrl"
-                                        type="text"
+                                        name="imageUrln"
+                                        type="url"
                                         value={formValues.imageUrl}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.imageUrl ? { borderColor: "red" } : {}}
                                     />
+                                    <label className="form-label" htmlFor="imageUrl">Image URL</label>
+                                    {formErrors.imageUrl &&
+                                        <p className="form-error">
+                                            {formErrors.imageUrl}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.imageUrl &&
-                                    <p className="form-error">
-                                        {formErrors.imageUrl}
-                                    </p>
-                                }
-                            </div>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="numberOfSlopes">Number Of Slopes</label>
-                            <div className="input-wrapper">
-                                <span><i className="fa-solid fa-image"></i></span>
-                                <input
-                                    id="numberOfSlopes"
-                                    name="numberOfSlopes"
-                                    type="text"
-                                    value={formValues.numberOfSlopes}
-                                    onChange={(e) => formChangeHandler(e)}
-                                    onBlur={(e) => formValidate(e)}
-                                    style={formErrors.numberOfSlopes ? { borderColor: "red" } : {}}
-                                />
-                            </div>
-                            {formErrors.numberOfSlopes &&
-                                <p className="form-error">
-                                    {formErrors.numberOfSlopes}
-                                </p>
-                            }
-                        </div>
-
-                        <div className="form-row">
-                            <div className="form-group">
-                                <label htmlFor="skiAreaSize">Ski Area Size</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-map"></i></span>
-                                    <input
+                                <div className="form-outline">
+                                    <input className="form-control"
+                                        id="numberOfSlopes"
+                                        name="numberOfSlopes"
+                                        type="text"
+                                        value={formValues.numberOfSlopes}
+                                        onChange={(e) => formChangeHandler(e)}
+                                        onBlur={(e) => formValidate(e)}
+                                    />
+                                    <label className="form-label" htmlFor="numberOfSlopes">Number Of Slopes</label>
+                                    {formErrors.numberOfSlopes &&
+                                        <p className="form-error">
+                                            {formErrors.numberOfSlopes}
+                                        </p>
+                                    }
+                                </div>
+                                <div className="form-outline">
+                                    <input className="form-control"
                                         id="skiAreaSize"
                                         name="skiAreaSize"
                                         type="text"
                                         value={formValues.skiAreaSize}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.skiAreaSize ? { borderColor: "red" } : {}}
                                     />
+                                    <label className="form-label" htmlFor="skiAreaSize">Ski Area Size</label>
+                                    {formErrors.skiAreaSize &&
+                                        <p className="form-error">
+                                            {formErrors.skiAreaSize}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.skiAreaSize &&
-                                    <p className="form-error">
-                                        {formErrors.skiAreaSize}
-                                    </p>
-                                }
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="countryId">Country</label>
-                                <div className="input-wrapper">
-                                    <span><i className="fa-solid fa-city"></i></span>
-                                    <input
+                                <div className="form-outline">
+                                    <select className="form-control"
                                         id="countryId"
                                         name="countryId"
-                                        type="text"
                                         value={formValues.countryId}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
-                                        style={formErrors.countryId ? { borderColor: "red" } : {}}
-                                    />
+                                    >
+                                        {state.data.map((c) => (<option key={c.id} value={c.Id}>{c.name}</option>))}
+                                    </select>
+                                    <label className="form-label" htmlFor="countryId">Country</label>
+                                    {formErrors.countryId &&
+                                        <p className="form-error">
+                                            {formErrors.countryId}
+                                        </p>
+                                    }
                                 </div>
-                                {formErrors.countryId &&
-                                    <p className="form-error">
-                                        {formErrors.countryId}
-                                    </p>
-                                }
-                            </div>
+                                <button type="submit" className={`${styles['create-button']} btn btn-primary`}>Create</button>
+                            </form>
+                        </div >
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
                         </div>
-
-                        <div id="form-actions">
-                            <button id="action-save" className="btn" type="submit">Save</button>
-                            <button id="action-cancel" className="btn" type="button">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

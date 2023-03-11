@@ -1,0 +1,11 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.create{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+

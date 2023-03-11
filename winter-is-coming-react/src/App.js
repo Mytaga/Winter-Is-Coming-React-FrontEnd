@@ -1,5 +1,5 @@
 import './App.css';
-import Resorts from './components/Resorts/Resorts';
+import {Resorts} from './components/Resorts/Resorts';
 import Header from './components/Header';
 import { Route, Routes } from "react-router-dom";
 import Home from './components/Home';
@@ -10,9 +10,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 
 function App() {
-
   const [resorts, setResorts] = useState([]);
-
   const [formValues, setFormValues] = useState({
     name: '',
     elevation: '',
@@ -28,8 +26,8 @@ function App() {
     elevation: '',
     description: '',
     imageUrl: '',
-    numberOfSlopes: 0,
-    skiAreaSize: 0,
+    numberOfSlopes: '',
+    skiAreaSize: '',
     countryId: '',
   });
 
@@ -69,8 +67,11 @@ function App() {
     setResorts(state => [...state, createdResort]);
   };
 
+  const formChangeHandler = (e) => {
+    setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+  };
+
   const formValidate = (e) => {
-    
     const value = e.target.value;
     const errors = {};
 
@@ -101,10 +102,6 @@ function App() {
     setFormErros(errors);
   };
 
-  const formChangeHandler = (e) => {
-    setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  };
-
   return (
     <Fragment>
       <Header />
@@ -118,9 +115,9 @@ function App() {
             formValues={formValues}
             formErrors={formErrors}
             onResortFilterSubmit={onResortFilterSubmit} />}
-            onResortCreateSubmit={onResortCreateSubmit} 
+            onResortCreateSubmit={onResortCreateSubmit}
             formChangeHandler={formChangeHandler}
-            formValidate={formValidate}/>
+            formValidate={formValidate} />
         </Routes>
       </main>
     </Fragment>
