@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCountries } from "../../services/resortService";
-import  styles  from "../Resort/Resort.module.css";
+import styles from "../Resort/Resort.module.css";
 
 function ResortCreate({
     onClose,
@@ -31,104 +31,110 @@ function ResortCreate({
                         </div>
                         <div className={`${styles['body']} modal-body`}>
                             <form onSubmit={(e) => onResortCreateSubmit(e)}>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="name">Name</label>
                                     <input className="form-control"
                                         id="name"
                                         name="name"
                                         type="text"
+                                        placeholder="Name"
                                         value={formValues.name}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="name">Name</label>
                                     {formErrors.name &&
                                         <p className="form-error">
                                             {formErrors.name}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="name">Elevation</label>
                                     <input className="form-control"
                                         id="elevation"
                                         name="elevation"
                                         type="text"
+                                        placeholder="Elevation"
                                         value={formValues.elevation}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="name">Elevation</label>
                                     {formErrors.elevation &&
                                         <p className="form-error">
                                             {formErrors.elevation}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="description">Description</label>
                                     <textarea className="form-control"
                                         id="description"
                                         name="description"
                                         type="text-area"
-                                        rows="4"
+                                        rows="2"
                                         value={formValues.description}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="description">Description</label>
                                     {formErrors.description &&
                                         <p className="form-error">
                                             {formErrors.description}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="imageUrl">Image URL</label>
                                     <input className="form-control"
                                         id="imageUrl"
-                                        name="imageUrln"
-                                        type="url"
+                                        name="imageUrl"
+                                        type="text"
+                                        placeholder="Image URL"
                                         value={formValues.imageUrl}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="imageUrl">Image URL</label>
                                     {formErrors.imageUrl &&
                                         <p className="form-error">
                                             {formErrors.imageUrl}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="numberOfSlopes">Number Of Slopes</label>
                                     <input className="form-control"
                                         id="numberOfSlopes"
                                         name="numberOfSlopes"
                                         type="text"
+                                        placeholder="Number Of Slopes"
                                         value={formValues.numberOfSlopes}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="numberOfSlopes">Number Of Slopes</label>
                                     {formErrors.numberOfSlopes &&
                                         <p className="form-error">
                                             {formErrors.numberOfSlopes}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="skiAreaSize">Ski Area Size</label>
                                     <input className="form-control"
                                         id="skiAreaSize"
                                         name="skiAreaSize"
                                         type="text"
+                                        placeholder="Ski Area Size"
                                         value={formValues.skiAreaSize}
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     />
-                                    <label className="form-label" htmlFor="skiAreaSize">Ski Area Size</label>
                                     {formErrors.skiAreaSize &&
                                         <p className="form-error">
                                             {formErrors.skiAreaSize}
                                         </p>
                                     }
                                 </div>
-                                <div className="form-outline">
+                                <div className="mb-3">
+                                    <label className="form-label" htmlFor="countryId">Country</label>
                                     <select className="form-control"
                                         id="countryId"
                                         name="countryId"
@@ -136,9 +142,8 @@ function ResortCreate({
                                         onChange={(e) => formChangeHandler(e)}
                                         onBlur={(e) => formValidate(e)}
                                     >
-                                        {state.data.map((c) => (<option key={c.id} value={c.Id}>{c.name}</option>))}
+                                        {state.data.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
                                     </select>
-                                    <label className="form-label" htmlFor="countryId">Country</label>
                                     {formErrors.countryId &&
                                         <p className="form-error">
                                             {formErrors.countryId}

@@ -114,10 +114,11 @@ function App() {
             resorts={resorts}
             formValues={formValues}
             formErrors={formErrors}
-            onResortFilterSubmit={onResortFilterSubmit} />}
+            onResortFilterSubmit={onResortFilterSubmit}
             onResortCreateSubmit={onResortCreateSubmit}
             formChangeHandler={formChangeHandler}
-            formValidate={formValidate} />
+            formValidate={formValidate}/>}
+            />
         </Routes>
       </main>
     </Fragment>
