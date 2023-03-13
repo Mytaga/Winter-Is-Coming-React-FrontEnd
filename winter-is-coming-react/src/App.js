@@ -5,12 +5,14 @@ import { Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import { Fragment } from 'react';
 import * as resortService from './services/resortService';
+import * as priceService from './services/priceService';
 import { useEffect, useState } from "react";
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 
 function App() {
   const [resorts, setResorts] = useState([]);
+
   const [formValues, setFormValues] = useState({
     name: '',
     elevation: '',
@@ -29,6 +31,18 @@ function App() {
     numberOfSlopes: '',
     skiAreaSize: '',
     countryId: '',
+  });
+
+  const [priceFormValues, setPriceFormValues] = useState({
+    value: 0.00,
+    passType: '',
+    resortId: '',
+  });
+
+  const [priceFormErrors, setPriceFormErrors] = useState({
+    value: '',
+    passType: '',
+    resortId: '',
   });
 
   useEffect(() => {
@@ -67,9 +81,22 @@ function App() {
     setResorts(state => [...state, createdResort]);
   };
 
+  const onPriceCreateSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    await priceService.addRPrice(data);
+  }
+
   const formChangeHandler = (e) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   };
+
+  const priceFormChangeHandler = (e) => {
+    setPriceFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+  }
 
   const formValidate = (e) => {
     const value = e.target.value;
@@ -95,12 +122,23 @@ function App() {
       errors.numberOfSlopes = 'Number of slopes should be between 0 and 1000';
     }
 
-    if (e.target.name === 'skiAreaSize' && (value === null)) {
-      errors.skiAreaSize = 'Number of slopes should be between 0 and 1000';
+    if (e.target.name === 'skiAreaSize' && (value < 0 || value > 1000)) {
+      errors.skiAreaSize = 'Ski Area Size should be between 0 and 1000';
     }
 
     setFormErros(errors);
   };
+
+  const priceFormValidate = (e) => {
+    const value = e.target.value;
+    const errors = {};
+    
+    if (e.target.name === 'value' && (value < 0 )) {
+      errors.skiAreaSize = 'Ski pass value cannot be negative';
+    }
+
+    setPriceFormErrors(errors);
+  }
 
   return (
     <Fragment>
@@ -113,11 +151,16 @@ function App() {
           <Route path="/resorts" element={<Resorts
             resorts={resorts}
             formValues={formValues}
+            priceFormValues={priceFormValues}
             formErrors={formErrors}
+            priceFormErrors={priceFormErrors}
             onResortFilterSubmit={onResortFilterSubmit}
             onResortCreateSubmit={onResortCreateSubmit}
+            onPriceCreateSubmit={onPriceCreateSubmit}
             formChangeHandler={formChangeHandler}
-            formValidate={formValidate}/>}
+            priceFormChangeHandler={priceFormChangeHandler}
+            formValidate={formValidate}
+            priceFormValidate={priceFormValidate}/>}
             />
         </Routes>
       </main>

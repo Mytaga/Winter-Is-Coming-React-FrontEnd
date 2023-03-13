@@ -54,3 +54,11 @@ export const addResort = async(resortData) => {
 
     return result;
 }
+
+export const GetResortNames = async() => {
+    const response = await fetch(`${baseUrl}/getResortNames`);
+
+    const result = await response.json();
+
+    return result;
+}
