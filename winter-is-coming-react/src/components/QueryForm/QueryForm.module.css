@@ -1,0 +1,10 @@
+.row{
+    display:flex;
+    align-items: center;
+    margin-top:20px;
+}
+
+.form-group{
+    width: 250px;
+    margin-right: 10px;
+}
