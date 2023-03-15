@@ -1,7 +1,7 @@
 import './App.css';
 import { Resorts } from './components/Resorts/Resorts';
 import Header from './components/Header/Header';
-import { Route, Routes } from "react-router-dom";
+import { useNavigate, Route, Routes } from "react-router-dom";
 import Home from './components/Home/Home';
 import { Fragment } from 'react';
 import * as resortService from './services/resortService';
@@ -10,8 +10,11 @@ import { useEffect, useState } from "react";
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ResortDetails from './components/Resort/ResortDetails';
+import ResortCreate from './components/Resort/ResortCreate';
+import PriceCreate from './components/Price/PriceCreate';
 
 function App() {
+  const navigate = useNavigate();
   const [resorts, setResorts] = useState([]);
   const [formValues, setFormValues] = useState({
     name: '',
@@ -74,6 +77,7 @@ function App() {
     const createdResort = await resortService.addResort(data);
 
     setResorts(state => [...state, createdResort]);
+    navigate('/resorts');
   };
 
   const onPriceCreateSubmit = async (e) => {
@@ -83,6 +87,7 @@ function App() {
     const data = Object.fromEntries(formData);
 
     await priceService.addPrice(data);
+    navigate('/resorts');
   }
 
   const formChangeHandler = (e) => {
@@ -148,19 +153,24 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/resorts" element={<Resorts
             resorts={resorts}
-            formValues={formValues}
-            priceFormValues={priceFormValues}
-            formErrors={formErrors}
-            priceFormErrors={priceFormErrors}
             onResortFilterSubmit={onResortFilterSubmit}
-            onResortCreateSubmit={onResortCreateSubmit}
-            onPriceCreateSubmit={onPriceCreateSubmit}
-            formChangeHandler={formChangeHandler}
-            priceFormChangeHandler={priceFormChangeHandler}
-            formValidate={formValidate}
-            priceFormValidate={priceFormValidate} />}
+          />}
           />
-          <Route path="/resorts/:resortId" element={<ResortDetails/>} />
+          <Route path="/resorts/:resortId" element={<ResortDetails />} />
+          <Route path="/resorts/create" element={<ResortCreate
+            formValues={formValues}
+            formErrors={formErrors}
+            onResortCreateSubmit={onResortCreateSubmit}
+            formChangeHandler={formChangeHandler}
+            formValidate={formValidate}
+          />} />
+          <Route path="/resorts/create-price" element={<PriceCreate
+            priceFormValues={priceFormValues}
+            priceFormErrors={priceFormErrors}
+            onPriceCreateSubmit={onPriceCreateSubmit}
+            priceFormChangeHandler={priceFormChangeHandler}
+            priceFormValidate={priceFormValidate}
+          />} />
         </Routes>
       </main>
     </Fragment>

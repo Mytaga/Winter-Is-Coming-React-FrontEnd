@@ -36,8 +36,8 @@ const Navigation = () => {
                     </ul>
                 </div>
                 <div className="d-flex align-items-center">
-                    <Link to={"/login"}className="nav-link" >Login</Link>
-                    <Link to={"/register"}className="nav-link" >Register</Link>
+                    <Link to={"/login"} className="nav-link" >Login</Link>
+                    <Link to={"/register"} className="nav-link" >Register</Link>
                     <div className="dropdown">
                         <a
                             className="dropdown-toggle d-flex align-items-center hidden-arrow"
@@ -60,13 +60,13 @@ const Navigation = () => {
                             aria-labelledby="navbarDropdownMenuAvatar"
                         >
                             <li>
-                                <a className="dropdown-item" href="/profile">My profile</a>
+                                <Link to={"/profile"} className="dropdown-item">Profile</Link>
                             </li>
                             <li>
-                                <a className="dropdown-item" href="/settings">Settings</a>
+                                <Link to={"/settings"} className="dropdown-item">Setting</Link>
                             </li>
                             <li>
-                                <a className="dropdown-item" href="/logout">Logout</a>
+                                <Link to={"/logout"} className="dropdown-item">Logout</Link>
                             </li>
                         </ul>
                     </div>
