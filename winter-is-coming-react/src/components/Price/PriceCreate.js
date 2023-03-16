@@ -34,7 +34,7 @@ function PriceCreate({
                 <form className={`${styles['form']}`} onSubmit={(e) => onPriceCreateSubmit(e)}>
                     <div className={`${styles['input-element']} mb-3`}>
                         <label className={`${styles['label']} form-label`} htmlFor="value">Value</label>
-                        <input className="form-control"
+                        <input className={`${styles['input']} form-control`}
                             id="value"
                             name="value"
                             type="text"
@@ -50,7 +50,7 @@ function PriceCreate({
                     </div>
                     <div className={`${styles['input-element']} mb-3`}>
                         <label className={`${styles['label']} form-label`} htmlFor="passType">Pass Type</label>
-                        <input className="form-control"
+                        <input className={`${styles['input']} form-control`}
                             id="passType"
                             name="passType"
                             type="text"

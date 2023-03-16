@@ -1,6 +1,6 @@
 import Price from "../Price/Price";
 import styles from "../Resort/ResortDetails.module.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as resortService from "../../services/resortService";
 
@@ -56,7 +56,11 @@ function ResortDetails() {
             </div>
             <div className={styles['buttons']}>
                 <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>Back</button>
-                <button className="btn btn-primary">Comments</button>
+                <button className="btn btn-primary">
+                    <Link className={styles['comments-button']} to={`/resorts/${resort.id}/comments`}>
+                        Comments
+                    </Link>
+                </button>
             </div>
         </div>
     );

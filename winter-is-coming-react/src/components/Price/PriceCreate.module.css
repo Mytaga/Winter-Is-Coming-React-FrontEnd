@@ -25,6 +25,10 @@
     text-transform: uppercase;
 }
 
+.input {
+    height: 40px;
+}
+
 .input-element{
     display:flex;
     flex-direction: column;

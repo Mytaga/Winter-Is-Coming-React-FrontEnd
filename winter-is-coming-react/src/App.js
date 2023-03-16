@@ -6,12 +6,15 @@ import Home from './components/Home/Home';
 import { Fragment } from 'react';
 import * as resortService from './services/resortService';
 import * as priceService from './services/priceService';
+import * as commentService from './services/commentService';
 import { useEffect, useState } from "react";
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ResortDetails from './components/Resort/ResortDetails';
 import ResortCreate from './components/Resort/ResortCreate';
 import PriceCreate from './components/Price/PriceCreate';
+import { Comments } from './components/Comments/Comments';
+import { CommentCreate } from './components/Comment/CommentCreate';
 
 function App() {
   const navigate = useNavigate();
@@ -46,6 +49,14 @@ function App() {
     value: '',
     passType: '',
     resortId: '',
+  });
+
+  const [commentFormValues, setCommentFormValues] = useState({
+    content: '',
+  });
+
+  const [commentFormErrors, setCommentFormErrors] = useState({
+    content: '',
   });
 
   useEffect(() => {
@@ -90,12 +101,26 @@ function App() {
     navigate('/resorts');
   }
 
+  const onCommentCreateSubmit = async (e, resortId) =>{
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    await commentService.addComment(resortId, data);
+    navigate(`/resorts/${resortId}/comments`);
+  }
+
   const formChangeHandler = (e) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   };
 
   const priceFormChangeHandler = (e) => {
     setPriceFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+  }
+
+  const commentFormChangeHandler = (e) => {
+    setCommentFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
   const formValidate = (e) => {
@@ -143,6 +168,17 @@ function App() {
     setPriceFormErrors(errors);
   }
 
+  const commentFormValidate = (e) => {
+    const value = e.target.value;
+    const errors = {};
+
+    if (e.target.name === 'content' && (value.length < 10 || value.length > 300)) {
+      errors.content = 'Content must be between 10 and 300 characters';
+    }
+
+    setCommentFormErrors(errors);
+  }
+
   return (
     <Fragment>
       <Header />
@@ -156,7 +192,15 @@ function App() {
             onResortFilterSubmit={onResortFilterSubmit}
           />}
           />
-          <Route path="/resorts/:resortId" element={<ResortDetails />} />
+          <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
+          <Route path="/resorts/:resortId/comments" element={<Comments />} />
+          <Route path="/resorts/:resortId/createComment" element={<CommentCreate
+            commentFormValues={commentFormValues} 
+            commentFormErrors={commentFormErrors}
+            commentFormValidate={commentFormValidate}
+            commentFormChangeHandler={commentFormChangeHandler}
+            onCommentCreateSubmit={onCommentCreateSubmit}
+            />} />
           <Route path="/resorts/create" element={<ResortCreate
             formValues={formValues}
             formErrors={formErrors}

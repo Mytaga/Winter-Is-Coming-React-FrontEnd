@@ -34,7 +34,6 @@
     position: relative;
     top: 10px;
     left: 60px;
-
 }
 
 .buttons{
@@ -44,6 +43,11 @@
 .back-button{
     margin-right: 10px;
 }
+
+.comments-button{
+    color: white;
+}
+
 .footer{
     justify-content: flex-start;
 }
