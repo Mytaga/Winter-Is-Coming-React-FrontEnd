@@ -1,12 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 import styles from "../Comment/CommentCreate.module.css";
 
 export const CommentCreate = ({
-    commentFormValues,
-    commentFormErrors,
-    commentFormValidate,
-    commentFormChangeHandler,
     onCommentCreateSubmit,
 }) => {
 
@@ -15,6 +12,29 @@ export const CommentCreate = ({
     const onBackButtonClick = () => {
         navigate(`/resorts/${resortId}`);
     };
+
+    const [commentFormValues, setCommentFormValues] = useState({
+        content: '',
+    });
+
+    const [commentFormErrors, setCommentFormErrors] = useState({
+        content: '',
+    });
+
+    const commentFormChangeHandler = (e) => {
+        setCommentFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+    }
+
+    const commentFormValidate = (e) => {
+        const value = e.target.value;
+        const errors = {};
+
+        if (e.target.name === 'content' && (value.length < 10 || value.length > 300)) {
+            errors.content = 'Content must be between 10 and 300 characters';
+        }
+
+        setCommentFormErrors(errors);
+    }
 
     return (
         <section className={styles['create']}>
@@ -29,18 +49,33 @@ export const CommentCreate = ({
                                         height="65" />
                                     <div className="w-100">
                                         <h5>Add a comment</h5>
-                                        <div className="form-outline">
-                                            <textarea className="form-control" id="textAreaExample" rows="4"></textarea>
-                                            <label className="form-label" for="textAreaExample">What is your view?</label>
-                                        </div>
-                                        <div className="d-flex justify-content-between mt-3">
-                                            <button type="button" className="btn btn-danger">
-                                                Send <i className="fas fa-long-arrow-alt-right ms-1"></i>
-                                            </button>
-                                            <button onClick={onBackButtonClick} type="button" className="btn btn-danger">
-                                                Back <i className="fas fa-long-arrow-alt-right ms-1"></i>
-                                            </button>
-                                        </div>
+                                        <form onSubmit={(e) => onCommentCreateSubmit(e)}>
+                                            <div className="mb-3">
+                                                <label className="form-label" htmlFor="content">Enter your comment</label>
+                                                <textarea className={`${styles['content']} form-control`}
+                                                    id="content"
+                                                    name="content"
+                                                    type="text-area"
+                                                    rows="4"
+                                                    value={commentFormValues.content}
+                                                    onChange={commentFormChangeHandler}
+                                                    onBlur={commentFormValidate}
+                                                />
+                                                {commentFormErrors.content &&
+                                                    <p className={`${styles['error']} form-error`}>
+                                                        {commentFormErrors.content}
+                                                    </p>
+                                                }
+                                            </div>
+                                            <div className="d-flex mt-3">
+                                                <button type="submit" className="btn btn-primary">
+                                                    Create
+                                                </button>
+                                                <button onClick={onBackButtonClick} type="button" className="btn btn-primary">
+                                                    Back
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

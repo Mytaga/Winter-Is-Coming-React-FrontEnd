@@ -29,7 +29,7 @@ export const Comments = () => {
                     <div className="col-md-12 col-lg-10">
                         <div className="card text-dark">
                             <div className="card-body p-4">
-                                <h4 className="mb-0">Resort comments</h4>
+                                <h4 className="mb-0">Comments</h4>
                                 {comments.map((comment) => (
                                     <Comment
                                         key={comment.id}

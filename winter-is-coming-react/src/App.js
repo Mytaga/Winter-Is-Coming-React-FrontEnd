@@ -51,14 +51,6 @@ function App() {
     resortId: '',
   });
 
-  const [commentFormValues, setCommentFormValues] = useState({
-    content: '',
-  });
-
-  const [commentFormErrors, setCommentFormErrors] = useState({
-    content: '',
-  });
-
   useEffect(() => {
     resortService.getResorts()
       .then(resorts => {
@@ -119,10 +111,6 @@ function App() {
     setPriceFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const commentFormChangeHandler = (e) => {
-    setCommentFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  }
-
   const formValidate = (e) => {
     const value = e.target.value;
     const errors = {};
@@ -168,17 +156,6 @@ function App() {
     setPriceFormErrors(errors);
   }
 
-  const commentFormValidate = (e) => {
-    const value = e.target.value;
-    const errors = {};
-
-    if (e.target.name === 'content' && (value.length < 10 || value.length > 300)) {
-      errors.content = 'Content must be between 10 and 300 characters';
-    }
-
-    setCommentFormErrors(errors);
-  }
-
   return (
     <Fragment>
       <Header />
@@ -195,10 +172,6 @@ function App() {
           <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
           <Route path="/resorts/:resortId/comments" element={<Comments />} />
           <Route path="/resorts/:resortId/createComment" element={<CommentCreate
-            commentFormValues={commentFormValues} 
-            commentFormErrors={commentFormErrors}
-            commentFormValidate={commentFormValidate}
-            commentFormChangeHandler={commentFormChangeHandler}
             onCommentCreateSubmit={onCommentCreateSubmit}
             />} />
           <Route path="/resorts/create" element={<ResortCreate

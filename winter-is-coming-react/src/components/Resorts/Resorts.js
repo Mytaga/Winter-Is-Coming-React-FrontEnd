@@ -12,7 +12,7 @@ export const Resorts = ({
     };
 
     return (
-        <div>
+        <div className={styles['body']}>
             <div className={styles['query-options']}>
                 <QueryForm onResortFilterSubmit={onResortFilterSubmitHandler} />
             </div>

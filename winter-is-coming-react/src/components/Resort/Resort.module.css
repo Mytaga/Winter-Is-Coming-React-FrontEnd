@@ -28,6 +28,7 @@
 
 .details-btn i{
     color: black;
+    padding: 10px;
 }
 
 .like-btn {
@@ -41,6 +42,11 @@
     text-transform: uppercase;
 }
 
+.like-btn i {
+    color: black;
+    padding: 10px;
+}
+
 .comment-btn {
     border-style: none;
     background-color: #e3f2fd;
@@ -50,6 +56,11 @@
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.comment-btn i{
+    color: black;
+    padding: 10px;
 }
 
 .footer {
