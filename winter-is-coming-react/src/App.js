@@ -80,8 +80,8 @@ function App() {
             onPriceCreateSubmit={onPriceCreateSubmit}
           />} />
         </Routes>
+        <Footer/>
       </main>
-      <Footer/>
     </Fragment>
   );
 }
