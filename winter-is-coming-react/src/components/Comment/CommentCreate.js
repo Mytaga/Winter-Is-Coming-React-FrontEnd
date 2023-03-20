@@ -1,29 +1,19 @@
-import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-
+import { Modal } from "react-bootstrap";
 import styles from "../Comment/CommentCreate.module.css";
+import { useForm } from "../../hooks/useForm";
 
 export const CommentCreate = ({
-    onCommentCreateSubmit,
+    onCommentCreate,
+    show,
+    close,
 }) => {
 
-    const navigate = useNavigate();
-    const { resortId } = useParams();
-    const onBackButtonClick = () => {
-        navigate(`/resorts/${resortId}`);
-    };
-
-    const [commentFormValues, setCommentFormValues] = useState({
-        content: '',
-    });
+    const { formValues, onSubmit, formChangeHandler } = useForm({ content: '', onCommentCreate });
 
     const [commentFormErrors, setCommentFormErrors] = useState({
         content: '',
     });
-
-    const commentFormChangeHandler = (e) => {
-        setCommentFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-    }
 
     const commentFormValidate = (e) => {
         const value = e.target.value;
@@ -37,52 +27,41 @@ export const CommentCreate = ({
     }
 
     return (
-        <section className={styles['create']}>
-            <div className="container my-5 py-5 text-dark">
-                <div className="row d-flex justify-content-center">
-                    <div className="col-md-10 col-lg-8 col-xl-6">
-                        <div className="card">
-                            <div className="card-body p-4">
-                                <div className="d-flex flex-start w-100">
-                                    <img className="rounded-circle shadow-1-strong me-3"
-                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                                        height="65" />
-                                    <div className="w-100">
-                                        <h5>Add a comment</h5>
-                                        <form onSubmit={(e) => onCommentCreateSubmit(e)}>
-                                            <div className="mb-3">
-                                                <label className="form-label" htmlFor="content">Enter your comment</label>
-                                                <textarea className={`${styles['content']} form-control`}
-                                                    id="content"
-                                                    name="content"
-                                                    type="text-area"
-                                                    rows="4"
-                                                    value={commentFormValues.content}
-                                                    onChange={commentFormChangeHandler}
-                                                    onBlur={commentFormValidate}
-                                                />
-                                                {commentFormErrors.content &&
-                                                    <p className={`${styles['error']} form-error`}>
-                                                        {commentFormErrors.content}
-                                                    </p>
-                                                }
-                                            </div>
-                                            <div className="d-flex mt-3">
-                                                <button type="submit" className="btn btn-primary">
-                                                    Create
-                                                </button>
-                                                <button onClick={onBackButtonClick} type="button" className="btn btn-primary">
-                                                    Back
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+        <Modal size="lg" show={show} onHide={close}>
+            <Modal.Header closeButton>
+                <Modal.Title>Add comment</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div className="w-100">
+                    <form onSubmit={onSubmit}>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="content">Enter your comment</label>
+                            <textarea className={`${styles['content']} form-control`}
+                                id="content"
+                                name="content"
+                                type="text-area"
+                                rows="4"
+                                value={formValues.content}
+                                onChange={formChangeHandler}
+                                onBlur={commentFormValidate}
+                            />
+                            {commentFormErrors.content &&
+                                <p className={`${styles['error']} form-error`}>
+                                    {commentFormErrors.content}
+                                </p>
+                            }
                         </div>
-                    </div>
+                        <div className="d-flex mt-3">
+                            <button type="submit" className="btn btn-primary">
+                                Create
+                            </button>
+                            <button onClick={close} type="button" className="btn btn-primary">
+                                Close
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </section>
+            </Modal.Body>
+        </Modal>
     );
 }

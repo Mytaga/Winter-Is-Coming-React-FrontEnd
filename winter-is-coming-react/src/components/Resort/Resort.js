@@ -32,11 +32,6 @@ function Resort({
                                 <i className="fas fa-heart"></i>
                             </Link>
                         </button>
-                        <button className={styles['comment-btn']}>
-                            <Link to={`/resorts/${id}/createComment`}>
-                                <i className="fas fa-comment"></i>
-                            </Link>
-                        </button>
                     </div>
                 </div>
                 <div className={`${styles['footer']} card-footer`}>

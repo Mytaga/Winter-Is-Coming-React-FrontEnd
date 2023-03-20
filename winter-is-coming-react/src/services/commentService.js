@@ -5,7 +5,7 @@ export const getResortComments = async(resortId) => {
 
     const result = await response.json();
 
-    return result.resorts;
+    return result.comments;
 };
 
 export const addComment = async(resortId, commentData) => {

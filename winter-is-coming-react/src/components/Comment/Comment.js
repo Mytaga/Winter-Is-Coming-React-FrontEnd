@@ -4,13 +4,14 @@ export const Comment = ({
     author,
     content,
     publishedOn,
+    authorImageUrl,
 }) => {
     return (
         <div className="d-flex flex-start">
             <img className="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="60"
+                src={authorImageUrl} alt={author} width="60"
                 height="60" />
-            <div>
+            <div className={styles['comment']}>
                 <h6 className="fw-bold mb-1">{author}</h6>
                 <div className="d-flex align-items-center mb-3">
                     <p className="mb-0">

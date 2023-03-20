@@ -1,15 +1,29 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .body{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #92badd;;
+    background-color: #92badd;
+    width: 600px;
+    margin-bottom: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
 }
 
 .title{
-    margin-left: 300px;
     text-transform: uppercase;
     font-weight: bold;
+    margin-top:10px;
 }
 
 .form {

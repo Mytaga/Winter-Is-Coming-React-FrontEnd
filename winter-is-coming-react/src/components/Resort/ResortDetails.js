@@ -1,14 +1,19 @@
 import Price from "../Price/Price";
 import styles from "../Resort/ResortDetails.module.css";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as resortService from "../../services/resortService";
+import { CommentCreate } from "../Comment/CommentCreate";
+import * as commentService from '../../services/commentService';
+import { Comments } from "../Comments/Comments";
 
 function ResortDetails() {
     const { resortId } = useParams();
-    const navigate = useNavigate();
     const [resort, setResort] = useState({});
     const [prices, setPrices] = useState([]);
+    const [showAddComment, setShowAddComment] = useState(false);
+    const [comments, setComments] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         resortService.getResortDetails(resortId)
@@ -19,12 +24,40 @@ function ResortDetails() {
             .catch(error => console.log(error))
     }, [resortId]);
 
+    useEffect(() => {
+        commentService.getResortComments(resortId)
+            .then(comments => {
+                setComments(comments)
+            })
+            .catch(error => console.log(error))
+    }, [resortId]);
+
     const onBackButtonClick = () => {
         navigate('/resorts');
     };
 
+    const onCommentCreate = async (values, resortId) => {
+        const result = await commentService.addComment(resortId, values);
+        setComments(state => [...state, result]);
+        onCommentClose();
+    }
+
+    const onCommentCreateClick = () => {
+        setShowAddComment(true);
+    }
+
+    const onCommentClose = () => {
+        setShowAddComment(false);
+    }
+
     return (
         <div className={styles['content']}>
+            <CommentCreate
+                resortId={resortId}
+                onCommentCreateSubmit={onCommentCreate}
+                show={showAddComment}
+                close={onCommentClose}
+            />
             <h2 className={styles['header']}>{resort.countryName} - {resort.name}</h2>
             <div className={styles['main-body']}>
                 <div className={styles['body']}>
@@ -55,13 +88,14 @@ function ResortDetails() {
                 </div>
             </div>
             <div className={styles['buttons']}>
-                <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>Back</button>
-                <button className="btn btn-primary">
-                    <Link className={styles['comments-button']} to={`/resorts/${resort.id}/comments`}>
-                        Comments
-                    </Link>
+                <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>
+                    <i className="fas fa-arrow-left fa-lg"></i>
+                </button>
+                <button className={`${styles['comment-button']} btn btn-primary`} onClick={onCommentCreateClick}>
+                    <i className="fas fa-comment fa-lg"></i>
                 </button>
             </div>
+            <Comments comments={comments} />
         </div>
     );
 }

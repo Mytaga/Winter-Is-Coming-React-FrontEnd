@@ -79,7 +79,7 @@ function ResortCreate({
     return (
         <div className={styles['content']}>
             <div className={styles['header']}>
-                <h5 className={`${styles['title']} modal-title`} id="exampleModalLabel">Create Resort</h5>
+                <h5 className={`${styles['title']} modal-title`}>Create Resort</h5>
             </div>
             <div className={`${styles['body']} modal-body`}>
                 <form className={`${styles['form']}`} onSubmit={(e) => onResortCreateSubmit(e)}>
