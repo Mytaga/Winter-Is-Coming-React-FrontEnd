@@ -5,10 +5,6 @@ import styles from "../Resort/ResortCreate.module.css";
 
 function ResortCreate({
     onResortCreateSubmit,
-    formValues,
-    formErrors,
-    formChangeHandler,
-    formValidate,
 }) {
 
     const navigate = useNavigate();
@@ -23,6 +19,61 @@ function ResortCreate({
 
     const onBackButtonClick = () => {
         navigate('/resorts');
+    };
+
+    const [formValues, setFormValues] = useState({
+        name: '',
+        elevation: '',
+        description: '',
+        imageUrl: '',
+        numberOfSlopes: 0,
+        skiAreaSize: 0,
+        countryId: '',
+    });
+
+    const [formErrors, setFormErros] = useState({
+        name: '',
+        elevation: '',
+        description: '',
+        imageUrl: '',
+        numberOfSlopes: '',
+        skiAreaSize: '',
+        countryId: '',
+    });
+
+    const formChangeHandler = (e) => {
+        setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+    };
+
+    const formValidate = (e) => {
+        const value = e.target.value;
+        const errors = {};
+
+        if (e.target.name === 'name' && (value.length < 2 || value.length > 50)) {
+            errors.name = 'Resort name should be between 2 and 50 characters';
+        }
+
+        if (e.target.name === 'elevation' && (value.length < 2 || value.length > 4)) {
+            errors.elevation = 'Elevation should be between 2 and 4 characters';
+        }
+
+        if (e.target.name === 'description' && (value.length < 20 || value.length > 150)) {
+            errors.description = 'Description should be between 20 and 150 characters';
+        }
+
+        if (e.target.name === 'imageUrl' && (value.length < 10 || value.length > 100)) {
+            errors.imageUrl = 'Image URL should be between 10 and 100 characters';
+        }
+
+        if (e.target.name === 'numberOfSlopes' && (value < 0 || value > 1000)) {
+            errors.numberOfSlopes = 'Number of slopes should be between 0 and 1000';
+        }
+
+        if (e.target.name === 'skiAreaSize' && (value < 0 || value > 1000)) {
+            errors.skiAreaSize = 'Ski Area Size should be between 0 and 1000';
+        }
+
+        setFormErros(errors);
     };
 
     return (

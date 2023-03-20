@@ -15,41 +15,11 @@ import ResortCreate from './components/Resort/ResortCreate';
 import PriceCreate from './components/Price/PriceCreate';
 import { Comments } from './components/Comments/Comments';
 import { CommentCreate } from './components/Comment/CommentCreate';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   const navigate = useNavigate();
   const [resorts, setResorts] = useState([]);
-  const [formValues, setFormValues] = useState({
-    name: '',
-    elevation: '',
-    description: '',
-    imageUrl: '',
-    numberOfSlopes: 0,
-    skiAreaSize: 0,
-    countryId: '',
-  });
-
-  const [formErrors, setFormErros] = useState({
-    name: '',
-    elevation: '',
-    description: '',
-    imageUrl: '',
-    numberOfSlopes: '',
-    skiAreaSize: '',
-    countryId: '',
-  });
-
-  const [priceFormValues, setPriceFormValues] = useState({
-    value: 0.00,
-    passType: '',
-    resortId: '',
-  });
-
-  const [priceFormErrors, setPriceFormErrors] = useState({
-    value: '',
-    passType: '',
-    resortId: '',
-  });
 
   useEffect(() => {
     resortService.getResorts()
@@ -103,59 +73,6 @@ function App() {
     navigate(`/resorts/${resortId}/comments`);
   }
 
-  const formChangeHandler = (e) => {
-    setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  };
-
-  const priceFormChangeHandler = (e) => {
-    setPriceFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  }
-
-  const formValidate = (e) => {
-    const value = e.target.value;
-    const errors = {};
-
-    if (e.target.name === 'name' && (value.length < 2 || value.length > 50)) {
-      errors.name = 'Resort name should be between 2 and 50 characters';
-    }
-
-    if (e.target.name === 'elevation' && (value.length < 2 || value.length > 4)) {
-      errors.elevation = 'Elevation should be between 2 and 4 characters';
-    }
-
-    if (e.target.name === 'description' && (value.length < 20 || value.length > 150)) {
-      errors.description = 'Description should be between 20 and 150 characters';
-    }
-
-    if (e.target.name === 'imageUrl' && (value.length < 10 || value.length > 100)) {
-      errors.imageUrl = 'Image URL should be between 10 and 100 characters';
-    }
-
-    if (e.target.name === 'numberOfSlopes' && (value < 0 || value > 1000)) {
-      errors.numberOfSlopes = 'Number of slopes should be between 0 and 1000';
-    }
-
-    if (e.target.name === 'skiAreaSize' && (value < 0 || value > 1000)) {
-      errors.skiAreaSize = 'Ski Area Size should be between 0 and 1000';
-    }
-
-    setFormErros(errors);
-  };
-
-  const priceFormValidate = (e) => {
-    const value = e.target.value;
-    const errors = {};
-
-    if (e.target.name === 'passType' && (value !== 'HalfDay' && value !== 'FullDay' && value !== 'Seasonal')) {
-      errors.passType = 'Pass type must be HalfDay, FullDay or Seasonal';
-    }
-    if (e.target.name === 'value' && (value < 0)) {
-      errors.skiAreaSize = 'Ski pass value cannot be negative';
-    }
-
-    setPriceFormErrors(errors);
-  }
-
   return (
     <Fragment>
       <Header />
@@ -167,29 +84,21 @@ function App() {
           <Route path="/resorts" element={<Resorts
             resorts={resorts}
             onResortFilterSubmit={onResortFilterSubmit}
-          />}
-          />
+          />} />
           <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
           <Route path="/resorts/:resortId/comments" element={<Comments />} />
           <Route path="/resorts/:resortId/createComment" element={<CommentCreate
             onCommentCreateSubmit={onCommentCreateSubmit}
             />} />
           <Route path="/resorts/create" element={<ResortCreate
-            formValues={formValues}
-            formErrors={formErrors}
             onResortCreateSubmit={onResortCreateSubmit}
-            formChangeHandler={formChangeHandler}
-            formValidate={formValidate}
           />} />
           <Route path="/resorts/create-price" element={<PriceCreate
-            priceFormValues={priceFormValues}
-            priceFormErrors={priceFormErrors}
             onPriceCreateSubmit={onPriceCreateSubmit}
-            priceFormChangeHandler={priceFormChangeHandler}
-            priceFormValidate={priceFormValidate}
           />} />
         </Routes>
       </main>
+      <Footer/>
     </Fragment>
   );
 }

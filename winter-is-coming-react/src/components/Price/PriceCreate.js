@@ -4,11 +4,7 @@ import styles from "../Price/PriceCreate.module.css";
 import { useNavigate } from "react-router-dom";
 
 function PriceCreate({
-    priceFormValidate,
-    priceFormValues,
-    priceFormErrors,
     onPriceCreateSubmit,
-    priceFormChangeHandler
 }) {
     const [state, setState] = useState({ data: [], isLoading: false });
 
@@ -25,6 +21,36 @@ function PriceCreate({
         navigate('/resorts');
     };
 
+    const [priceFormValues, setPriceFormValues] = useState({
+        value: 0.00,
+        passType: '',
+        resortId: '',
+    });
+
+    const [priceFormErrors, setPriceFormErrors] = useState({
+        value: '',
+        passType: '',
+        resortId: '',
+    });
+
+    const priceFormChangeHandler = (e) => {
+        setPriceFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+      }
+    
+      const priceFormValidate = (e) => {
+        const value = e.target.value;
+        const errors = {};
+    
+        if (e.target.name === 'passType' && (value !== 'HalfDay' && value !== 'FullDay' && value !== 'Seasonal')) {
+          errors.passType = 'Pass type must be HalfDay, FullDay or Seasonal';
+        }
+        if (e.target.name === 'value' && (value < 0)) {
+          errors.skiAreaSize = 'Ski pass value cannot be negative';
+        }
+    
+        setPriceFormErrors(errors);
+      }
+    
     return (
         <div className="modal-content">
             <div className="modal-header">
