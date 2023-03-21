@@ -3,33 +3,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.body{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #92badd;
-    width: 600px;
-    margin-bottom: 30px;
+    border-radius: 5px;
 }
 
 .header {
     display: flex;
     justify-content: center;
+    background-color: aliceblue;
 }
 
 .title{
     text-transform: uppercase;
     font-weight: bold;
     margin-top:10px;
+    margin-left:150px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    width: 300px;
     justify-content: center;
     align-items: center;
 }
@@ -55,21 +48,12 @@
     width: 400px;
 }
 
-.create-button{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    width: 200px;
-}
-
-.back-button{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 200px;
-}
-
 .error {
     color:red;
     font-family: bold;
     text-transform: uppercase;
+}
+
+.buttons{
+    margin-bottom: 20px;
 }

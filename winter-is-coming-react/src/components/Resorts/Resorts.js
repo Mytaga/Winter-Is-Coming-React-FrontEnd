@@ -1,20 +1,46 @@
 import Resort from "../Resort/Resort";
 import styles from "./Resorts.module.css";
 import { QueryForm } from "../QueryForm/QueryForm";
-import { Link } from "react-router-dom";
 import PriceCreate from "../Price/PriceCreate";
 import { useState } from "react";
+import * as resortService from '../../services/resortService';
 import * as priceService from '../../services/priceService';
+import ResortCreate from "../Resort/ResortCreate";
+import { useEffect } from "react";
 
-export const Resorts = ({
-    resorts,
-    onResortFilterSubmit,
-}) => {
+export const Resorts = () => {
 
+    const [resorts, setResorts] = useState([]);
     const [showAddPrice, setShowAddPrices] = useState(false);
+    const [showAddResort, setShowAddResort] = useState(false);
 
-    const onResortFilterSubmitHandler = (e) => {
-        onResortFilterSubmit(e);
+    useEffect(() => {
+        resortService.getResorts()
+            .then(resorts => {
+                setResorts(resorts)
+            })
+            .catch(error => console.log(error))
+    }, []);
+
+    const onResortFilterSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const searchQuery = formData.search;
+        const country = formData.country;
+
+        const filtered = await resortService.getFilteredResorts(searchQuery, country);
+
+        setResorts(state => [...state, filtered]);
+    }
+
+    const onResortCreate = async (values) => {
+
+        const createdResort = await resortService.addResort(values);
+
+        setResorts(state => [...state, createdResort]);
+
+        onResortCreateClose();
     };
 
     const onPriceCreate = async (values) => {
@@ -26,8 +52,16 @@ export const Resorts = ({
         setShowAddPrices(true);
     };
 
+    const onResortCreateClick = () => {
+        setShowAddResort(true);
+    }
+
     const onPriceCreateClose = () => {
         setShowAddPrices(false);
+    }
+
+    const onResortCreateClose = () => {
+        setShowAddResort(false);
     }
 
     return (
@@ -37,16 +71,19 @@ export const Resorts = ({
                 show={showAddPrice}
                 close={onPriceCreateClose}
             />
+            <ResortCreate
+                show={showAddResort}
+                onResortCreate={onResortCreate}
+                close={onResortCreateClose}
+            />
             <div className={styles['query-options']}>
-                <QueryForm onResortFilterSubmit={onResortFilterSubmitHandler} />
+                <QueryForm onResortFilterSubmit={onResortFilterSubmit} />
             </div>
             <div className={styles['add-buttons']}>
-                <button className="btn btn-primary">
-                    <Link to={'/resorts/create'} className={styles['add-button']}>
-                        Add new resort
-                    </Link>
+                <button className="btn btn-primary" onClick={onResortCreateClick}>
+                    Add new resort
                 </button>
-                <button className="btn btn-primary" onClick={onPriceCreateClick}>
+                <button className="btn btn-primary" onClick={onPriceCreateClick} >
                     Add new price
                 </button>
             </div>
@@ -58,7 +95,6 @@ export const Resorts = ({
                     />
                 ))}
             </div>
-
         </div>
     );
 }

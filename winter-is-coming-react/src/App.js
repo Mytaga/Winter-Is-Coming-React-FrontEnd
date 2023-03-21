@@ -1,54 +1,16 @@
 import './App.css';
 import { Resorts } from './components/Resorts/Resorts';
 import Header from './components/Header/Header';
-import { useNavigate, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from './components/Home/Home';
 import { Fragment } from 'react';
-import * as resortService from './services/resortService';
-import { useEffect, useState } from "react";
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ResortDetails from './components/Resort/ResortDetails';
-import ResortCreate from './components/Resort/ResortCreate';
 import { Footer } from './components/Footer/Footer';
 
 function App() {
-  const navigate = useNavigate();
-  const [resorts, setResorts] = useState([]);
 
-  useEffect(() => {
-    resortService.getResorts()
-      .then(resorts => {
-        setResorts(resorts)
-      })
-      .catch(error => console.log(error))
-  }, []);
-
-  const onResortFilterSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const searchQuery = formData.search;
-    const country = formData.country;
-
-    const filtered = await resortService.getFilteredResorts(searchQuery, country);
-
-    setResorts(state => [...state, filtered]);
-  }
-
-  const onResortCreateSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-
-    const createdResort = await resortService.addResort(data);
-
-    setResorts(state => [...state, createdResort]);
-    navigate('/resorts');
-  };
-
-  
   return (
     <Fragment>
       <Header />
@@ -57,16 +19,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/resorts" element={<Resorts
-            resorts={resorts}
-            onResortFilterSubmit={onResortFilterSubmit}
-          />} />
+          <Route path="/resorts" element={<Resorts/>} />
           <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
-          <Route path="/resorts/create" element={<ResortCreate
-            onResortCreateSubmit={onResortCreateSubmit}
-          />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </main>
     </Fragment>
   );

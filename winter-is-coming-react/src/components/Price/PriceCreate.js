@@ -41,12 +41,12 @@ function PriceCreate({
     }
 
     return (
-        <Modal size="lg" show={show} onHide={close}>
-            <Modal.Header closeButton>
-                <Modal.Title>Create Price</Modal.Title>
+        <Modal show={show} onHide={close}>
+            <Modal.Header className={styles['header']} closeButton>
+                <Modal.Title className={styles['title']}>Create Price</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <div className="w-100">
+            <Modal.Body className={styles['content']}>
+                <div>
                     <form className={`${styles['form']}`} onSubmit={onSubmit}>
                         <div className={`${styles['input-element']} mb-3`}>
                             <label className={`${styles['label']} form-label`} htmlFor="value">Value</label>
@@ -97,7 +97,7 @@ function PriceCreate({
                                 </p>
                             }
                         </div>
-                        <div className="d-flex mt-3">
+                        <div className={`${styles['buttons']} d-flex mt-3`}>
                             <button type="submit" className="btn btn-primary">
                                 Create
                             </button>
