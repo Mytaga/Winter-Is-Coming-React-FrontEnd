@@ -5,13 +5,11 @@ import { useNavigate, Route, Routes } from "react-router-dom";
 import Home from './components/Home/Home';
 import { Fragment } from 'react';
 import * as resortService from './services/resortService';
-import * as priceService from './services/priceService';
 import { useEffect, useState } from "react";
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import ResortDetails from './components/Resort/ResortDetails';
 import ResortCreate from './components/Resort/ResortCreate';
-import PriceCreate from './components/Price/PriceCreate';
 import { Footer } from './components/Footer/Footer';
 
 function App() {
@@ -50,16 +48,7 @@ function App() {
     navigate('/resorts');
   };
 
-  const onPriceCreateSubmit = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-
-    await priceService.addPrice(data);
-    navigate('/resorts');
-  }
-
+  
   return (
     <Fragment>
       <Header />
@@ -75,9 +64,6 @@ function App() {
           <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
           <Route path="/resorts/create" element={<ResortCreate
             onResortCreateSubmit={onResortCreateSubmit}
-          />} />
-          <Route path="/resorts/create-price" element={<PriceCreate
-            onPriceCreateSubmit={onPriceCreateSubmit}
           />} />
         </Routes>
         <Footer/>

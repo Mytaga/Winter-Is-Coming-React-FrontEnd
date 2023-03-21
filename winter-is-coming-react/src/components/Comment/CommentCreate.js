@@ -9,7 +9,7 @@ export const CommentCreate = ({
     close,
 }) => {
 
-    const { formValues, onSubmit, formChangeHandler } = useForm({ content: '', onCommentCreate });
+    const { formValues, onSubmit, formChangeHandler } = useForm({ content: ''}, onCommentCreate);
 
     const [commentFormErrors, setCommentFormErrors] = useState({
         content: '',
