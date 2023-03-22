@@ -63,7 +63,7 @@ const Navigation = () => {
                                 <Link to={"/profile"} className="dropdown-item">Profile</Link>
                             </li>
                             <li>
-                                <Link to={"/settings"} className="dropdown-item">Setting</Link>
+                                <Link to={"/settings"} className="dropdown-item">Settings</Link>
                             </li>
                             <li>
                                 <Link to={"/logout"} className="dropdown-item">Logout</Link>

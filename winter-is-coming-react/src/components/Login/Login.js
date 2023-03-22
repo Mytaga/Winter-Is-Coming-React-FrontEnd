@@ -1,13 +1,31 @@
 import styles from './Login.module.css'
+import { useForm } from '../../hooks/useForm';
 
-function Login() {
+function Login({
+  onLoginSubmit,
+}) {
+
+  const { formValues, formChangeHandler, onSubmit } = useForm({ email: '', password: '' }, onLoginSubmit);
+
   return (
     <div className={styles['wrapper']}>
       <div className={styles['formContent']}>
         <h2 className={styles['active']}> Login</h2>
-        <form>
-          <input type="text" id="login" className={styles['fadeIn-second']} name="login" placeholder="Email" />
-          <input type="text" id="password" className={styles['fadeIn-third']} name="login" placeholder="Password" />
+        <form onSubmit={onSubmit}>
+          <input className={styles['fadeIn-second']}
+            type="text"
+            id="login"
+            name="email"
+            placeholder="Email"
+            value={formValues.email}
+            onChange={formChangeHandler} />
+          <input className={styles['fadeIn-third']}
+            type="text"
+            id="password"
+            name="password"
+            placeholder="Password"
+            value={formValues.password}
+            onChange={formChangeHandler} />
           <input type="submit" className={styles['fadeIn-fourth']} value="Log In" />
         </form>
         <div className={styles['formFooter']}>

@@ -28,7 +28,7 @@ function ResortCreate({
         countryId: ''}, 
         onResortCreate);
 
-    const [formErrors, setFormErros] = useState({
+    const [formErrors, setFormErrors] = useState({
         name: '',
         elevation: '',
         description: '',
@@ -66,7 +66,7 @@ function ResortCreate({
             errors.skiAreaSize = 'Ski Area Size should be between 0 and 1000';
         }
 
-        setFormErros(errors);
+        setFormErrors(errors);
     };
 
     return (
