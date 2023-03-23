@@ -1,9 +1,11 @@
 import styles from './Login.module.css'
 import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
 
-function Login({
-  onLoginSubmit,
-}) {
+function Login() {
+
+  const {onLoginSubmit} = useContext(AuthContext);
 
   const { formValues, formChangeHandler, onSubmit } = useForm({ email: '', password: '' }, onLoginSubmit);
 
@@ -11,7 +13,7 @@ function Login({
     <div className={styles['wrapper']}>
       <div className={styles['formContent']}>
         <h2 className={styles['active']}> Login</h2>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} method="POST">
           <input className={styles['fadeIn-second']}
             type="text"
             id="login"

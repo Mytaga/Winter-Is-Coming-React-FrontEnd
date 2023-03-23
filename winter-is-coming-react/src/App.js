@@ -6,10 +6,12 @@ import Home from './components/Home/Home';
 import { Fragment } from 'react';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
+import { Logout } from './components/Logout/Logout';
 import ResortDetails from './components/Resort/ResortDetails';
 import { Footer } from './components/Footer/Footer';
 import { useState } from 'react';
 import * as accountService from './services/accountService';
+import { AuthContext } from './contexts/AuthContext';
 
 function App() {
 
@@ -28,24 +30,43 @@ function App() {
   };
 
   const onRegisterSubmit = async (data) => {
-    await accountService.login(data);
+    await accountService.register(data);
     navigate('/login');
   };
 
+  const onLogout = async () => {
+    await accountService.logout();
+    setAuth({});
+  }
+
+  const contextValues = {
+    onLoginSubmit,
+    onRegisterSubmit,
+    onLogout,
+    userId: auth.id,
+    token: auth.token,
+    username: auth.userName,
+    image: auth.image,
+    isAuthenticated: !!auth.token,
+  }
+
   return (
-    <Fragment>
-      <Header />
-      <main className="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login onLoginSubmit={onLoginSubmit} />} />
-          <Route path="/register" element={<Register onRegisterSubmit={onRegisterSubmit}/>} />
-          <Route path="/resorts" element={<Resorts />} />
-          <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
-        </Routes>
-        <Footer />
-      </main>
-    </Fragment>
+    <AuthContext.Provider value={contextValues}>
+      <Fragment>
+        <Header />
+        <main className="main">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/resorts" element={<Resorts />} />
+            <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
+          </Routes>
+          <Footer />
+        </main>
+      </Fragment>
+    </AuthContext.Provider>
   );
 }
 

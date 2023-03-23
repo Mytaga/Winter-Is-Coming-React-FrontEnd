@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from '../../contexts/AuthContext';
+import { Fragment, useContext } from 'react';
 
 const Navigation = () => {
+
+    const { username, image, isAuthenticated } = useContext(AuthContext);
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container">
@@ -27,55 +32,57 @@ const Navigation = () => {
                         <li className="nav-item">
                             <Link to={"/resorts"} className="nav-link">All Resorts</Link>
                         </li>
-                        <li className="nav-item">
+                        {isAuthenticated && (<li className="nav-item">
                             <Link to={"/myResorts"} className="nav-link">My Resorts</Link>
-                        </li>
+                        </li>)}
+
                         <li className="nav-item">
                             <Link to={"/topResorts"} className="nav-link">Top Resorts</Link>
                         </li>
                     </ul>
                 </div>
                 <div className="d-flex align-items-center">
-                    <Link to={"/login"} className="nav-link" >Login</Link>
-                    <Link to={"/register"} className="nav-link" >Register</Link>
-                    <div className="dropdown">
-                        <a
-                            className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                            id="navbarDropdownMenuAvatar"
-                            role="button"
-                            data-mdb-toggle="dropdown"
-                            aria-expanded="false"
-                            href="/profile"
-                        >
-                            <img
-                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                                className="rounded-circle"
-                                height="35"
-                                alt="Black and White Portrait of a Man"
-                                loading="lazy"
-                            />
-                        </a>
-                        <ul
-                            className="dropdown-menu dropdown-menu-end"
-                            aria-labelledby="navbarDropdownMenuAvatar"
-                        >
-                            <li>
-                                <Link to={"/profile"} className="dropdown-item">Profile</Link>
-                            </li>
-                            <li>
-                                <Link to={"/settings"} className="dropdown-item">Settings</Link>
-                            </li>
-                            <li>
-                                <Link to={"/logout"} className="dropdown-item">Logout</Link>
-                            </li>
-                        </ul>
-                    </div>
+                    {!isAuthenticated && (<Fragment>
+                        <Link to={"/login"} className="nav-link" >Login</Link>
+                        <Link to={"/register"} className="nav-link" >Register</Link>
+                    </Fragment>)}
+                    {isAuthenticated && (<span className="nav-link">Hello {username}!</span>)}
+                    {isAuthenticated && (
+                        <div className="dropdown">
+                            <a
+                                className="dropdown-toggle d-flex align-items-center hidden-arrow"
+                                id="navbarDropdownMenuAvatar"
+                                role="button"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                                href="/profile"
+                            >
+                                <img
+                                    src={image}
+                                    className="rounded-circle"
+                                    height="35"
+                                    alt="Profile avatar"
+                                    loading="lazy"
+                                />
+                            </a>
+                            <ul
+                                className="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="navbarDropdownMenuAvatar"
+                            >
+                                <li>
+                                    <Link to={"/profile"} className="dropdown-item">Profile</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/settings"} className="dropdown-item">Settings</Link>
+                                </li>
+                                <li>
+                                    <Link to={"/logout"} className="dropdown-item">Logout</Link>
+                                </li>
+                            </ul>
+                        </div>)}
                 </div>
-
             </div>
-
         </nav>
-
     );
 }
 

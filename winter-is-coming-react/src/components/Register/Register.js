@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import styles from './Register.module.css'
 import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
 
-function Register({
-    onRegisterSubmit,
-}) {
+function Register() {
+
+    const {onRegisterSubmit} = useContext(AuthContext);
 
     const [formErrors, setFormErrors] = useState({
         firstName: '',
@@ -46,7 +48,7 @@ function Register({
         <div className={styles['wrapper']}>
             <div className={styles['formContent']}>
                 <h2 className={styles['active']}> Register </h2>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} method="POST">
                     <input className={styles['fadeIn-second']}
                         type="text"
                         id="register"

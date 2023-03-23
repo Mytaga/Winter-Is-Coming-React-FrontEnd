@@ -15,19 +15,20 @@ export const login = async(userData) =>{
 };
 
 export const register = async(userData) =>{
-    const response = await fetch(`${baseUrl}/register`, {
+    await fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
         },
         body: JSON.stringify(userData)
     });
-
-    const result = await response.json();
-
-    return result;
 };
 
 export const logout = async() => {
-
+    await fetch(`${baseUrl}/logout`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+        },
+    });
 };

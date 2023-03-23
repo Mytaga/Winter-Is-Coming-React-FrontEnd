@@ -33,7 +33,7 @@ export const CommentCreate = ({
             </Modal.Header>
             <Modal.Body>
                 <div className="w-100">
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={onSubmit} method="POST">
                         <div className="mb-3">
                             <label className="form-label" htmlFor="content">Enter your comment</label>
                             <textarea className={`${styles['content']} form-control`}

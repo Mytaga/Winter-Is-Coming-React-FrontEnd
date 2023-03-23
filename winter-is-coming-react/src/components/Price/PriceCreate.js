@@ -47,7 +47,7 @@ function PriceCreate({
             </Modal.Header>
             <Modal.Body className={styles['content']}>
                 <div>
-                    <form className={`${styles['form']}`} onSubmit={onSubmit}>
+                    <form className={`${styles['form']}`} onSubmit={onSubmit} method="POST">
                         <div className={`${styles['input-element']} mb-3`}>
                             <label className={`${styles['label']} form-label`} htmlFor="value">Value</label>
                             <input className={`${styles['input']} form-control`}
