@@ -8,15 +8,16 @@ export const getResortComments = async(resortId) => {
     return result.comments;
 };
 
-export const addComment = async(resortId, commentData) => {
+export const addComment = async(commentData, resortId) => {
     const response = await fetch(`${baseUrl}/add/${resortId}`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
         },
-        body: JSON.stringify(commentData)
+        body: JSON.stringify(commentData),
     });
-
+    console.log(commentData);
+    console.log(resortId);
     const result = await response.json();
 
     return result;

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Modal } from "react-bootstrap";
 import styles from "../Comment/CommentCreate.module.css";
 import { useForm } from "../../hooks/useForm";
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const CommentCreate = ({
     onCommentCreate,
@@ -9,7 +10,8 @@ export const CommentCreate = ({
     close,
 }) => {
 
-    const { formValues, onSubmit, formChangeHandler } = useForm({ content: ''}, onCommentCreate);
+    const { username, userId } = useContext(AuthContext);
+    const { formValues, onSubmit, formChangeHandler } = useForm({ content: '', author: `${username}`, appUserId: `${userId}`}, onCommentCreate);
 
     const [commentFormErrors, setCommentFormErrors] = useState({
         content: '',

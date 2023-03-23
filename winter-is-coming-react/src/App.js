@@ -35,7 +35,7 @@ function App() {
   };
 
   const onLogout = async () => {
-    await accountService.logout();
+    await accountService.logout(auth.token);
     setAuth({});
   }
 
