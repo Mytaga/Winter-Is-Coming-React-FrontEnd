@@ -1,5 +1,6 @@
 import './App.css';
 import { Resorts } from './components/Resorts/Resorts';
+import { MyResorts } from './components/Resorts/MyResorts';
 import Header from './components/Header/Header';
 import { useNavigate, Route, Routes } from "react-router-dom";
 import Home from './components/Home/Home';
@@ -61,6 +62,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/resorts" element={<Resorts />} />
+            <Route path="/myResorts" element={<MyResorts />} />
             <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
           </Routes>
           <Footer />

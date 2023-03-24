@@ -30,7 +30,6 @@ export const logout = async(token) => {
         method: 'POST',
         headers: {
             'authorization': `Bearer ${token}`,
-            'content-type': 'application/json',
         },
     });
 };

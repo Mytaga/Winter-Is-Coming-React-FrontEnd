@@ -62,3 +62,17 @@ export const getResortNames = async() => {
 
     return result;
 }
+
+export const getMyResorts = async (userId, token) => {
+
+    const response = await fetch(`${baseUrl}/getLiked/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    const result = await response.json();
+
+    return result.resorts;
+};

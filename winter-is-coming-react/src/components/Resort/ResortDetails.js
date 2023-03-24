@@ -15,7 +15,7 @@ function ResortDetails() {
     const [showAddComment, setShowAddComment] = useState(false);
     const [comments, setComments] = useState([]);
     const navigate = useNavigate();
-    const { token } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);
 
     useEffect(() => {
         resortService.getResortDetails(resortId)
@@ -93,9 +93,9 @@ function ResortDetails() {
                 <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>
                     <i className="fas fa-arrow-left fa-lg"></i>
                 </button>
-                <button className={`${styles['comment-button']} btn btn-primary`} onClick={onCommentCreateClick}>
+                {isAuthenticated && (<button className={`${styles['comment-button']} btn btn-primary`} onClick={onCommentCreateClick}>
                     <i className="fas fa-comment fa-lg"></i>
-                </button>
+                </button>)}
             </div>
             <Comments comments={comments} />
         </div>

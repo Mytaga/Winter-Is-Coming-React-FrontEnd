@@ -1,5 +1,7 @@
 import styles from './Resort.module.css'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
 
 function Resort({
     id,
@@ -9,6 +11,7 @@ function Resort({
     countryName,
     likes,
 }) {
+    const { isAuthenticated } = useContext(AuthContext);
     return (
         <div className={`${styles['card']} col`}>
             <div className="card h-100">
@@ -27,11 +30,11 @@ function Resort({
                                 <i className="fas fa-info-circle"></i>
                             </Link>
                         </button>
-                        <button className={styles['like-btn']}>
+                        {isAuthenticated && (<button className={styles['like-btn']}>
                             <Link>
                                 <i className="fas fa-heart"></i>
                             </Link>
-                        </button>
+                        </button>)}
                     </div>
                 </div>
                 <div className={`${styles['footer']} card-footer`}>
