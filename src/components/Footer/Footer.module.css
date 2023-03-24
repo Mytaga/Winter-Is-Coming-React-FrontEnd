@@ -1,0 +1,12 @@
+.footer{
+    width: 100%;
+    position:absolute;  
+    margin:auto;
+    white-space: nowrap;
+    bottom: 0;
+}
+
+.footer-content{
+    background-color: #e3f2fd;
+    height: 80px;
+}
