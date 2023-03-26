@@ -1,10 +1,16 @@
 import styles from "../Profile/Profile.module.css";
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from "react";
-
+import { useNavigate } from "react-router-dom";
 export const Profile = () => {
 
-    const {onBackButtonClick} = useContext(AuthContext);
+    const { onBackButtonClick } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const onFavClick = ()  =>{
+        navigate('/myResorts');
+    }
 
     return (
         <div className={`${styles['main-body']} container`}>
@@ -19,7 +25,9 @@ export const Profile = () => {
                                         <h3>Username</h3>
                                     </div>
                                     <div className="mt-3">
-                                        <button className="btn btn-primary">Favourite Resorts</button>
+                                        <button className="btn btn-primary" onClick={onFavClick}>                                          
+                                                Favourite Resorts
+                                        </button>
                                     </div>
                                 </div>
                             </div>

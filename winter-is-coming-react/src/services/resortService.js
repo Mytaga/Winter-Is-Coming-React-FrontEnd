@@ -76,3 +76,12 @@ export const getMyResorts = async (userId, token) => {
 
     return result.resorts;
 };
+
+export const getTopResorts = async () => {
+
+    const response = await fetch(`${baseUrl}/topLiked`);
+       
+    const result = await response.json();
+
+    return result.resorts;
+};

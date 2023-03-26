@@ -13,6 +13,20 @@ export const likeResort = async (resortId, userId, token) => {
     return result;
 }
 
+export const unlikeResort = async (resortId, userId, token) => {
+    const response = await fetch(`${baseUrl}/unlike/${resortId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'authorization': `Bearer ${token}`,
+        },
+    });
+
+    const result = response.json();
+
+    return result;
+}
+
+
 export const getResortLikes = async(resortId) => {
     
     const response = await fetch(`${baseUrl}/getResortLikes/${resortId}`)

@@ -12,10 +12,10 @@ function Resort({
     countryName,
     likes,
 }) {
-    
+
     const [allLikes, setAllLikes] = useState([]);
     const { isAuthenticated, userId, token } = useContext(AuthContext);
-    
+
     const isLiked = allLikes.some(l => l.userId === userId);
 
     useEffect(() => {
@@ -27,8 +27,14 @@ function Resort({
     }, [id, token]);
 
     const onLikeClick = async () => {
-        const like = await likeService.likeResort(id, userId, token);
-        setAllLikes(state => [...state, like]);
+
+        if (!isLiked) {
+            const like = await likeService.likeResort(id, userId, token);
+            setAllLikes(state => [...state, like]);
+        } else {
+            const like = await likeService.unlikeResort(id, userId, token);
+            setAllLikes(state => state.filter(l => l.id !== like.id));
+        }
     }
 
     return (
@@ -51,8 +57,8 @@ function Resort({
                         </button>
                         {isAuthenticated && (<button className={styles['like-btn']} onClick={onLikeClick}>
                             <Link>
-                                {!isLiked ? <i className="far fa-heart"></i> :<i className="fas fa-heart"></i>}
-                            </Link> 
+                                {!isLiked ? <i className="far fa-heart"></i> : <i className="fas fa-heart"></i>}
+                            </Link>
                         </button>)}
                     </div>
                 </div>
