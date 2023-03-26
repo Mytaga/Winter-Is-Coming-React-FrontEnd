@@ -1,7 +1,8 @@
 import styles from './Resort.module.css'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import * as likeService from '../../services/likeService';
 
 function Resort({
     id,
@@ -11,7 +12,25 @@ function Resort({
     countryName,
     likes,
 }) {
-    const { isAuthenticated } = useContext(AuthContext);
+    
+    const [allLikes, setAllLikes] = useState([]);
+    const { isAuthenticated, userId, token } = useContext(AuthContext);
+    
+    const isLiked = allLikes.some(l => l.userId === userId);
+
+    useEffect(() => {
+        likeService.getResortLikes(id)
+            .then(likes => {
+                setAllLikes(likes)
+            })
+            .catch(error => console.log(error))
+    }, [id, token]);
+
+    const onLikeClick = async () => {
+        const like = await likeService.likeResort(id, userId, token);
+        setAllLikes(state => [...state, like]);
+    }
+
     return (
         <div className={`${styles['card']} col`}>
             <div className="card h-100">
@@ -30,10 +49,10 @@ function Resort({
                                 <i className="fas fa-info-circle"></i>
                             </Link>
                         </button>
-                        {isAuthenticated && (<button className={styles['like-btn']}>
+                        {isAuthenticated && (<button className={styles['like-btn']} onClick={onLikeClick}>
                             <Link>
-                                <i className="fas fa-heart"></i>
-                            </Link>
+                                {!isLiked ? <i className="far fa-heart"></i> :<i className="fas fa-heart"></i>}
+                            </Link> 
                         </button>)}
                     </div>
                 </div>

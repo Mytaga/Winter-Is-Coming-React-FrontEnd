@@ -1,6 +1,6 @@
 import Price from "../Price/Price";
 import styles from "../Resort/ResortDetails.module.css";
-import { useParams, useNavigate, } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import * as resortService from "../../services/resortService";
 import { CommentCreate } from "../Comment/CommentCreate";
@@ -14,8 +14,7 @@ function ResortDetails() {
     const [prices, setPrices] = useState([]);
     const [showAddComment, setShowAddComment] = useState(false);
     const [comments, setComments] = useState([]);
-    const navigate = useNavigate();
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, token, onBackButtonClick } = useContext(AuthContext);
 
     useEffect(() => {
         resortService.getResortDetails(resortId)
@@ -34,12 +33,9 @@ function ResortDetails() {
             .catch(error => console.log(error))
     }, [resortId]);
 
-    const onBackButtonClick = () => {
-        navigate('/resorts');
-    };
-
+  
     const onCommentCreate = async (values) => {
-        const result = await commentService.addComment(values, resortId);
+        const result = await commentService.addComment(values, resortId, token);
         setComments(state => [...state, result]);
         onCommentClose();
     }

@@ -1,6 +1,7 @@
 import './App.css';
 import { Resorts } from './components/Resorts/Resorts';
 import { MyResorts } from './components/Resorts/MyResorts';
+import { TopResorts } from './components/Resorts/TopResorts';
 import Header from './components/Header/Header';
 import { useNavigate, Route, Routes } from "react-router-dom";
 import Home from './components/Home/Home';
@@ -13,6 +14,7 @@ import { Footer } from './components/Footer/Footer';
 import { useState } from 'react';
 import * as accountService from './services/accountService';
 import { AuthContext } from './contexts/AuthContext';
+import { Profile } from './components/Profile/Profile';
 
 function App() {
 
@@ -40,10 +42,16 @@ function App() {
     setAuth({});
   }
 
+  const onBackButtonClick = () => {
+    navigate('/resorts');
+  };
+
+
   const contextValues = {
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
+    onBackButtonClick,
     userId: auth.id,
     token: auth.token,
     username: auth.userName,
@@ -61,8 +69,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/resorts" element={<Resorts />} />
             <Route path="/myResorts" element={<MyResorts />} />
+            <Route path="/topResorts" element={<TopResorts />} />
             <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
           </Routes>
           <Footer />
