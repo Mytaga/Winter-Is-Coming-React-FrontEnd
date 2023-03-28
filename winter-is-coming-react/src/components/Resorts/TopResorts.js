@@ -3,7 +3,7 @@ import styles from "./TopResorts.module.css";
 import { useState, useEffect } from "react";
 import * as resortService from '../../services/resortService';
 
-export const TopResorts = () =>{
+export const TopResorts = () => {
     const [topResorts, setTopResorts] = useState([]);
 
     useEffect(() => {
@@ -15,13 +15,15 @@ export const TopResorts = () =>{
     }, []);
 
     return (
-        <div className={`${styles['cards']} row row-cols-1 row-cols-md-3 g-4`}> 
-            {topResorts.map((resort) => (
-                <Resort
-                    key={resort.id}
-                    {...resort}
-                />
-            ))}
+        <div className={styles['body']}>
+            <div className={`${styles['cards']} row row-cols-1 row-cols-md-3 g-4`}>
+                {topResorts.map((resort) => (
+                    <Resort
+                        key={resort.id}
+                        {...resort}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

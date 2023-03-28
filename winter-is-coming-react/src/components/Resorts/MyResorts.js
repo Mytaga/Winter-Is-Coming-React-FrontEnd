@@ -17,16 +17,18 @@ export const MyResorts = () => {
     }, [userId, token]);
 
     return (
-        <div className={`${styles['cards']} row row-cols-1 row-cols-md-3 g-4`}> 
-            {myResorts.map((resort) => (
-                <Resort
-                    key={resort.id}
-                    {...resort}
-                />
-            ))}
-            {myResorts.length === 0 && (
-                <h3>You haven't liked any resorts yet !</h3>
-            )}
+        <div className={styles['body']}>
+            <div className={`${styles['cards']} row row-cols-1 row-cols-md-3 g-4`}>
+                {myResorts.map((resort) => (
+                    <Resort
+                        key={resort.id}
+                        {...resort}
+                    />
+                ))}
+                {myResorts.length === 0 && (
+                    <h3>You haven't liked any resorts yet !</h3>
+                )}
+            </div>
         </div>
     );
 };

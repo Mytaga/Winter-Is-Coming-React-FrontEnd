@@ -32,3 +32,16 @@ export const logout = async(token) => {
         },
     });
 };
+
+export const getProfile = async(userId, token) => {
+    const response = await fetch(`${baseUrl}/viewProfile/${userId}`, {
+        method: 'GET',
+        headers: {
+            'authorization': `Bearer ${token}`,
+        },
+    });
+
+    const result = response.json();
+
+    return result;
+}

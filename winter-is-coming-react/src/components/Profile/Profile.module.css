@@ -9,3 +9,8 @@
 .back-button{
     margin-right: 10px;
 }
+
+.user-info {
+    font-size: 18px;
+    font-weight: bold;
+}

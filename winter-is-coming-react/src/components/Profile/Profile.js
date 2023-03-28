@@ -1,16 +1,27 @@
 import styles from "../Profile/Profile.module.css";
 import { AuthContext } from '../../contexts/AuthContext';
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import * as accountService from "../../services/accountService";
+
 export const Profile = () => {
 
-    const { onBackButtonClick } = useContext(AuthContext);
+    const { onBackButtonClick, userId, token } = useContext(AuthContext);
+    const [user, setUser] = useState({})
 
     const navigate = useNavigate();
 
-    const onFavClick = ()  =>{
+    const onFavClick = () => {
         navigate('/myResorts');
     }
+
+    useEffect(() => {
+        accountService.getProfile(userId, token)
+            .then(user => {
+                setUser(user)
+            })
+            .catch(error => console.log(error))
+    }, [userId, token]);
 
     return (
         <div className={`${styles['main-body']} container`}>
@@ -20,13 +31,13 @@ export const Profile = () => {
                         <div className={`${styles['body']} card`}>
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src="imageUrl" alt="profile-pic" className="rounded-circle" width="150" />
+                                    <img src={user.imageUrl} alt="profile-pic" className="rounded-circle" width="150" />
                                     <div className="mt-3 text-dark">
-                                        <h3>Username</h3>
+                                        <h3>{user.userName}</h3>
                                     </div>
                                     <div className="mt-3">
-                                        <button className="btn btn-primary" onClick={onFavClick}>                                          
-                                                Favourite Resorts
+                                        <button className="btn btn-primary" onClick={onFavClick}>
+                                            Favourite Resorts
                                         </button>
                                     </div>
                                 </div>
@@ -40,8 +51,8 @@ export const Profile = () => {
                                     <div className="col-sm-3">
                                         <h5 className="mb-0">First Name</h5>
                                     </div>
-                                    <div className="col-sm-9 text-white">
-                                        FirstName
+                                    <div className={`${styles['user-info']} col-sm-9`}>
+                                        {user.firstName}
                                     </div>
                                 </div>
                                 <hr />
@@ -49,8 +60,8 @@ export const Profile = () => {
                                     <div className="col-sm-3">
                                         <h5 className="mb-0">Last Name</h5>
                                     </div>
-                                    <div className="col-sm-9 text-white">
-                                        LastName
+                                    <div className={`${styles['user-info']} col-sm-9`}>
+                                        {user.lastName}
                                     </div>
                                 </div>
                                 <hr />
@@ -58,8 +69,8 @@ export const Profile = () => {
                                     <div className="col-sm-3">
                                         <h5 className="mb-0">Email</h5>
                                     </div>
-                                    <div className="col-sm-9 text-white">
-                                        Email
+                                    <div className={`${styles['user-info']} col-sm-9`}>
+                                        {user.email}
                                     </div>
                                 </div>
                                 <hr />
@@ -67,8 +78,8 @@ export const Profile = () => {
                                     <div className="col-sm-3">
                                         <h5 className="mb-0">Username</h5>
                                     </div>
-                                    <div className="col-sm-9 text-white">
-                                        Username
+                                    <div className={`${styles['user-info']} col-sm-9`}>
+                                        {user.userName}
                                     </div>
                                 </div>
                                 <hr />
