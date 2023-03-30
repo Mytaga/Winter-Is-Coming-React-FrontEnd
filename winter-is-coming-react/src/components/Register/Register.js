@@ -1,13 +1,16 @@
 import { Link } from 'react-router-dom';
-import styles from './Register.module.css'
+import { useState, useContext } from 'react';
+
 import { useForm } from '../../hooks/useForm';
-import { useState } from 'react';
+
 import { AuthContext } from '../../contexts/AuthContext';
-import { useContext } from 'react';
 
-function Register() {
 
-    const {onRegisterSubmit} = useContext(AuthContext);
+import styles from './Register.module.css'
+
+export const Register = () => {
+
+    const { onRegisterSubmit } = useContext(AuthContext);
 
     const [formErrors, setFormErrors] = useState({
         firstName: '',
@@ -37,7 +40,7 @@ function Register() {
             errors.lastName = 'Last name should be between 2 and 30 characters';
         }
 
-        if (e.target.name === 'usename' && (value.length < 1 || value.length > 50)) {
+        if (e.target.name === 'usename' && (value.length < 2 || value.length > 50)) {
             errors.username = 'Username should be between 1 and 50 characters';
         }
 
@@ -102,14 +105,14 @@ function Register() {
                         name="password"
                         placeholder="Password"
                         value={formValues.password}
-                        onChange={formChangeHandler}/>
+                        onChange={formChangeHandler} />
                     <input className={styles['fadeIn-fifth']}
                         type="text"
                         id="register"
                         name="confirmPassword"
                         placeholder="Confirm Password"
                         value={formValues.confirmPassword}
-                        onChange={formChangeHandler}/>
+                        onChange={formChangeHandler} />
                     <input type="submit" className={styles['fadeIn-fourth']} value="Register" />
                 </form>
                 <div className={styles['formFooter']}>

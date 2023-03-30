@@ -8,7 +8,7 @@ import * as commentService from '../../services/commentService';
 import { Comments } from "../Comments/Comments";
 import { AuthContext } from '../../contexts/AuthContext';
 
-function ResortDetails() {
+export function ResortDetails() {
     const { resortId } = useParams();
     const [resort, setResort] = useState({});
     const [prices, setPrices] = useState([]);
@@ -98,4 +98,3 @@ function ResortDetails() {
     );
 }
 
-export default ResortDetails;

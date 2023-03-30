@@ -1,18 +1,22 @@
-import Resort from "../Resort/Resort";
-import styles from "./Resorts.module.css";
-import { QueryForm } from "../QueryForm/QueryForm";
-import PriceCreate from "../Price/PriceCreate";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
+
 import * as resortService from '../../services/resortService';
 import * as priceService from '../../services/priceService';
+
 import ResortCreate from "../Resort/ResortCreate";
-import { useEffect } from "react";
+import PriceCreate from "../Price/PriceCreate";
+import { QueryForm } from "../QueryForm/QueryForm";
+import Resort from "../Resort/Resort";
+import styles from "./Resorts.module.css";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export const Resorts = () => {
 
     const [resorts, setResorts] = useState([]);
     const [showAddPrice, setShowAddPrices] = useState(false);
     const [showAddResort, setShowAddResort] = useState(false);
+
+    const { isAuthenticated, token } = useContext(AuthContext);
 
     useEffect(() => {
         resortService.getResorts()
@@ -36,16 +40,16 @@ export const Resorts = () => {
 
     const onResortCreate = async (values) => {
 
-        const createdResort = await resortService.addResort(values);
+        const createdResort = await resortService.addResort(values, token);
 
         setResorts(state => [...state, createdResort]);
 
-        onResortCreateClose();
+        setShowAddResort(false);
     };
 
     const onPriceCreate = async (values) => {
-        await priceService.addPrice(values);
-        onPriceCreateClose();
+        await priceService.addPrice(values, token);
+        setShowAddPrices(false)
     };
 
     const onPriceCreateClick = () => {
@@ -79,14 +83,14 @@ export const Resorts = () => {
             <div className={styles['query-options']}>
                 <QueryForm onResortFilterSubmit={onResortFilterSubmit} />
             </div>
-            <div className={styles['add-buttons']}>
+            {isAuthenticated && (<div className={styles['add-buttons']}>
                 <button className="btn btn-primary" onClick={onResortCreateClick}>
                     Add new resort
                 </button>
                 <button className="btn btn-primary" onClick={onPriceCreateClick} >
                     Add new price
                 </button>
-            </div>
+            </div>)}
             <div className={`${styles['cards']} row row-cols-1 row-cols-md-3 g-4`}>
                 {resorts.map((resort) => (
                     <Resort

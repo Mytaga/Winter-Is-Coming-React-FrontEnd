@@ -50,11 +50,11 @@ function ResortCreate({
             errors.elevation = 'Elevation should be between 2 and 4 characters';
         }
 
-        if (e.target.name === 'description' && (value.length < 20 || value.length > 150)) {
+        if (e.target.name === 'description' && (value.length < 20 || value.length > 350)) {
             errors.description = 'Description should be between 20 and 150 characters';
         }
 
-        if (e.target.name === 'imageUrl' && (value.length < 10 || value.length > 100)) {
+        if (e.target.name === 'imageUrl' && (value.length < 10 || value.length > 200)) {
             errors.imageUrl = 'Image URL should be between 10 and 100 characters';
         }
 
@@ -191,9 +191,13 @@ function ResortCreate({
                                 </p>
                             }
                         </div>
-                        <div>
-                            <button type="submit" className={`${styles['create-button']} btn btn-primary`}>Create</button>
-                            <button onClick={close} className={`${styles['back-button']} btn btn-primary`}>Close</button>
+                        <div className={`${styles['buttons']} d-flex mt-3`}>
+                            <button type="submit" className="btn btn-primary">
+                                Create
+                            </button>
+                            <button onClick={close} type="button" className="btn btn-primary">
+                                Close
+                            </button>
                         </div>
                     </form>
                 </div >

@@ -1,9 +1,11 @@
-import styles from './Login.module.css'
-import { useForm } from '../../hooks/useForm';
-import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from 'react';
 
-function Login() {
+import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../contexts/AuthContext';
+
+import styles from './Login.module.css'
+
+export const Login = () =>{
 
   const {onLoginSubmit} = useContext(AuthContext);
 
@@ -37,5 +39,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;

@@ -1,6 +1,6 @@
 const baseUrl = 'https://localhost:5001/api/Account';
 
-export const login = async(userData) =>{
+export const login = async (userData) => {
     const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
@@ -14,7 +14,7 @@ export const login = async(userData) =>{
     return result;
 };
 
-export const register = async(userData) =>{
+export const register = async (userData) => {
     await fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ export const register = async(userData) =>{
     });
 };
 
-export const logout = async(token) => {
+export const logout = async (token) => {
     await fetch(`${baseUrl}/logout`, {
         method: 'POST',
         headers: {
@@ -33,7 +33,7 @@ export const logout = async(token) => {
     });
 };
 
-export const getProfile = async(userId, token) => {
+export const getProfile = async (userId, token) => {
     const response = await fetch(`${baseUrl}/viewProfile/${userId}`, {
         method: 'GET',
         headers: {
@@ -45,3 +45,18 @@ export const getProfile = async(userId, token) => {
 
     return result;
 }
+
+export const editProfile = async (userId, token, userData) => {
+    const response = await fetch(`${baseUrl}/updateProfile/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(userData)
+    });
+
+    const result  = response.json();
+
+    return result;
+};

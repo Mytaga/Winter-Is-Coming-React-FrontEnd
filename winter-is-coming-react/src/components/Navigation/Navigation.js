@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { AuthContext } from '../../contexts/AuthContext';
 import { Fragment, useContext } from 'react';
+
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Navigation = () => {
 

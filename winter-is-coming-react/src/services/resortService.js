@@ -41,11 +41,12 @@ export const getResortDetails = async (id) =>{
     return result;
 }
 
-export const addResort = async(resortData) => {
+export const addResort = async(resortData, token) => {
     const response = await fetch(`${baseUrl}/add`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(resortData)
     });

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from '../../contexts/AuthContext';
 import { useContext } from "react";
 
-const Home = () => {
+export const Home = () => {
     const { isAuthenticated } = useContext(AuthContext);
     return (
         <div id="intro-example" className="p-5 text-center bg-image">
@@ -23,5 +23,3 @@ const Home = () => {
         </div>
     );
 }
-
-export default Home; 

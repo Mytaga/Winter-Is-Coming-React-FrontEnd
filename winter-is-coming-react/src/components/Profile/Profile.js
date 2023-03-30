@@ -1,19 +1,16 @@
 import styles from "../Profile/Profile.module.css";
 import { AuthContext } from '../../contexts/AuthContext';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as accountService from "../../services/accountService";
+import { UpdateProfile } from "./UpdateProfile";
 
 export const Profile = () => {
 
-    const { onBackButtonClick, userId, token } = useContext(AuthContext);
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState({});
+    const [showEditProfile, setEditProfile] = useState(false);
 
-    const navigate = useNavigate();
-
-    const onFavClick = () => {
-        navigate('/myResorts');
-    }
+    const { onBackButtonClick, userId, token} = useContext(AuthContext);
 
     useEffect(() => {
         accountService.getProfile(userId, token)
@@ -22,21 +19,46 @@ export const Profile = () => {
             })
             .catch(error => console.log(error))
     }, [userId, token]);
+    
+    const navigate = useNavigate();
+
+    const onFavClick = () => {
+        navigate('/myResorts');
+    }
+   
+    const onEditProfile = async (values) => {
+        const result = await accountService.editProfile(userId, token, values);
+        setUser(result);
+        onEditClose();
+    }
+
+    const onEditProfileClick = () => {
+        setEditProfile(true);
+    }
+
+    const onEditClose = () => {
+        setEditProfile(false);
+    }
 
     return (
         <div className={`${styles['main-body']} container`}>
+            <UpdateProfile
+                show={showEditProfile}
+                close={onEditClose} 
+                onEditProfile={onEditProfile}
+            />
             <div className="main-body">
                 <div className="row gutters-sm">
                     <div className="col-md-4 mb-3">
                         <div className={`${styles['body']} card`}>
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={user.imageUrl} alt="profile-pic" className="rounded-circle" width="150" />
+                                    <img src={user.imageUrl} alt="profile-pic" className="rounded-circle" width="178" />
                                     <div className="mt-3 text-dark">
                                         <h3>{user.userName}</h3>
                                     </div>
                                     <div className="mt-3">
-                                        <button className="btn btn-primary" onClick={onFavClick}>
+                                        <button className="btn btn-lg btn-primary" onClick={onFavClick}>
                                             Favourite Resorts
                                         </button>
                                     </div>
@@ -85,10 +107,10 @@ export const Profile = () => {
                                 <hr />
                                 <div className="row mt-4">
                                     <div className="col-sm-12">
-                                        <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>
+                                        <button className={`${styles['back-button']} btn btn-lg btn-primary`} onClick={onBackButtonClick}>
                                             <i className="fas fa-arrow-left fa-lg"></i>
                                         </button>
-                                        <button className="btn btn-primary">Update Profile</button>
+                                        <button className="btn btn-lg btn-primary" onClick={onEditProfileClick}>Update Profile</button>
                                     </div>
                                 </div>
                             </div>
