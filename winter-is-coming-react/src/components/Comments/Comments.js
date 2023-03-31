@@ -11,7 +11,7 @@ export const Comments = ({
                 <div className="row d-flex justify-content-center">
                     <div className="col-md-12 col-lg-10">
                         <div className="card text-dark">
-                            <div className="card-body p-4">
+                            <div className={`${styles['body']} card-body p-4`}>
                                 <h4 className={`${styles['header']} mb-0`}>Comments:</h4>
                                 {comments.map((comment) => (
                                     <Comment
