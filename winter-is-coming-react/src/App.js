@@ -14,11 +14,13 @@ import { Resorts } from './components/Resorts/Resorts';
 import { MyResorts } from './components/Resorts/MyResorts';
 import { TopResorts } from './components/Resorts/TopResorts';
 import { Header } from './components/Header/Header';
+import { ProfileProvider } from './contexts/ProfileContext';
 
 function App() {
 
   return (
     <AuthProvider>
+      <ProfileProvider>
       <Fragment>
         <Header />
         <main className="main">
@@ -36,6 +38,7 @@ function App() {
           <Footer />
         </main>
       </Fragment>
+      </ProfileProvider>
     </AuthProvider>
   );
 }

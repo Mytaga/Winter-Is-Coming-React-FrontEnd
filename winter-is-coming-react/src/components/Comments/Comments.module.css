@@ -1,7 +1,10 @@
-.section {
-    background-color: whitesmoke;
+.main {
+    width: 1000px;
 }
-
 .back-button{
     margin-top:20px;
+}
+
+.header {
+    padding-bottom: 30px;
 }

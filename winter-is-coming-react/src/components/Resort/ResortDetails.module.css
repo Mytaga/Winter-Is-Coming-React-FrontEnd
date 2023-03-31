@@ -1,10 +1,8 @@
 .content{
     padding: 40px;
-    background-color:  whitesmoke;
 }
 .header{
     color: black;
-    margin-bottom: 40px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -13,13 +11,17 @@
 .main-body{
     display: flex;
     gap: 10px;
+    padding: 50px;
 }
 
 .body{
-    width: 700px;
+    width: 800px;
     display: flex;
     flex-direction: column;
     gap: 3px;
+    background-color: #e3f2fd;
+    padding: 30px;
+    border-radius: 10px;
 }
 
 .table {
@@ -28,16 +30,25 @@
     text-transform: uppercase;
 }
 
-.image img{
-    width: 600px;
-    height: 400px;
-    position: relative;
-    top: 10px;
-    left: 60px;
+.image-body {
+    width: 900px;
+    background-color: #e3f2fd;
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.image{
+    width: 800px;
+    height: 500px;
+    border-radius: 6px;
 }
 
 .buttons{
     margin-top:20px;
+    position: relative;
+    left: 800px;
 }
 
 .back-button{

@@ -1,6 +1,6 @@
 const baseUrl = 'https://localhost:5001/api/Comment';
 
-export const getResortComments = async(resortId) => {
+export const getResortComments = async (resortId) => {
     const response = await fetch(`${baseUrl}/getResortComments/${resortId}`);
 
     const result = await response.json();
@@ -8,7 +8,7 @@ export const getResortComments = async(resortId) => {
     return result.comments;
 };
 
-export const addComment = async(commentData, resortId, token) => {
+export const addComment = async (commentData, resortId, token) => {
     const response = await fetch(`${baseUrl}/add/${resortId}`, {
         method: 'POST',
         headers: {
@@ -17,7 +17,21 @@ export const addComment = async(commentData, resortId, token) => {
         },
         body: JSON.stringify(commentData),
     });
-    
+
+    const result = await response.json();
+
+    return result;
+};
+
+export const deleteComment = async (resortId, userId, token) => {
+    const response = await fetch(`${baseUrl}/delete/${resortId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'authorization': `Bearer ${token}`,
+            'content-type': 'application/json',
+        }
+    });
+
     const result = await response.json();
 
     return result;

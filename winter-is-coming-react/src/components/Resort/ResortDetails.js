@@ -14,7 +14,7 @@ export function ResortDetails() {
     const [prices, setPrices] = useState([]);
     const [showAddComment, setShowAddComment] = useState(false);
     const [comments, setComments] = useState([]);
-    const { isAuthenticated, token, onBackButtonClick } = useContext(AuthContext);
+    const { isAuthenticated, token, userId, onBackButtonClick } = useContext(AuthContext);
 
     useEffect(() => {
         resortService.getResortDetails(resortId)
@@ -33,7 +33,7 @@ export function ResortDetails() {
             .catch(error => console.log(error))
     }, [resortId]);
 
-  
+
     const onCommentCreate = async (values) => {
         const result = await commentService.addComment(values, resortId, token);
         setComments(state => [...state, result]);
@@ -46,6 +46,11 @@ export function ResortDetails() {
 
     const onCommentClose = () => {
         setShowAddComment(false);
+    }
+
+    const onDeleteClick = async () => {
+        var result = await commentService.deleteComment(resortId, userId, token);
+        setComments(state => state.filter(c => c.id !== result.id));
     }
 
     return (
@@ -81,19 +86,22 @@ export function ResortDetails() {
                         </tbody>
                     </table>
                 </div>
-                <div className={styles['image']}>
-                    <img src={resort.imageUrl} alt={resort.name} />
+                <div className={styles['image-body']}>
+                    <img className={styles['image']} src={resort.imageUrl} alt={resort.name} />
                 </div>
             </div>
             <div className={styles['buttons']}>
-                <button className={`${styles['back-button']} btn btn-primary`} onClick={onBackButtonClick}>
+                <button className={`${styles['back-button']} btn btn-lg btn-primary`} onClick={onBackButtonClick}>
                     <i className="fas fa-arrow-left fa-lg"></i>
                 </button>
-                {isAuthenticated && (<button className={`${styles['comment-button']} btn btn-primary`} onClick={onCommentCreateClick}>
+                {isAuthenticated && (<button className={`${styles['comment-button']} btn  btn-lg btn-primary`} onClick={onCommentCreateClick}>
                     <i className="fas fa-comment fa-lg"></i>
                 </button>)}
             </div>
-            <Comments comments={comments} />
+            <Comments
+                comments={comments}
+                onDeleteClick={onDeleteClick}
+            />
         </div>
     );
 }

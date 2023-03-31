@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { Fragment, useContext } from 'react';
 
 import { AuthContext } from '../../contexts/AuthContext';
+import { ProfileContext } from "../../contexts/ProfileContext";
 
 const Navigation = () => {
 
-    const { username, image, isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);
+    const {username, userImage} = useContext(ProfileContext);
 
     return (
         <nav className="navbar navbar-expand-lg">
@@ -59,7 +61,7 @@ const Navigation = () => {
                                 href="/profile"
                             >
                                 <img
-                                    src={image}
+                                    src={userImage}
                                     className="rounded-circle"
                                     height="35"
                                     alt="Profile avatar"

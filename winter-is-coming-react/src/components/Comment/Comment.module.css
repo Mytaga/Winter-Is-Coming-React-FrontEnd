@@ -1,5 +1,7 @@
 .link-muted {
     color: #aaa;
+    border: none;
+    background-color: white;
 }
 
 .link-muted:hover {
@@ -7,5 +9,9 @@
 }
 
 .comment {
-    width: 400px;
+    width: 600px;
+}
+
+.body {
+    margin-bottom: 30px;
 }

@@ -19,7 +19,7 @@ export function QueryForm(
             <div className={styles['row']}>
                 <div className="form-group col-md-3 d-flex justify-content-between">
                     <div className={styles['form-group']}>
-                        <label htmlFor="country">Country</label>
+                        <label className={styles['label']} htmlFor="country">Country</label>
                         <select id="country" name="country" className="form-control">
                             <option value="">All</option>
                             {state.data.map((c) => (<option key={c.id} value={c.name}>{c.name}</option>))}
@@ -27,7 +27,7 @@ export function QueryForm(
                     </div>
                 </div>
                 <div className="form-group col-md-3">
-                    <label htmlFor="searchQuery"><i className="fas fa-search"></i></label>
+                    <label className={styles['label']} htmlFor="searchQuery"><i className="fas fa-search"></i></label>
                     <input id="searchQuery" name="searchQuery" className="form-control" placeholder="Search by name"></input>
                 </div>
                 <div className="col-md-3">

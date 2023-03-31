@@ -1,31 +1,23 @@
 import styles from "../Profile/Profile.module.css";
 import { AuthContext } from '../../contexts/AuthContext';
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as accountService from "../../services/accountService";
 import { UpdateProfile } from "./UpdateProfile";
+import { ProfileContext } from "../../contexts/ProfileContext";
 
 export const Profile = () => {
 
-    const [user, setUser] = useState({});
     const [showEditProfile, setEditProfile] = useState(false);
+    const { setUser, userImage, username, firstname, lastname, email } = useContext(ProfileContext)
+    const { onBackButtonClick, userId, token } = useContext(AuthContext);
 
-    const { onBackButtonClick, userId, token} = useContext(AuthContext);
-
-    useEffect(() => {
-        accountService.getProfile(userId, token)
-            .then(user => {
-                setUser(user)
-            })
-            .catch(error => console.log(error))
-    }, [userId, token]);
-    
     const navigate = useNavigate();
 
     const onFavClick = () => {
         navigate('/myResorts');
     }
-   
+
     const onEditProfile = async (values) => {
         const result = await accountService.editProfile(userId, token, values);
         setUser(result);
@@ -44,7 +36,7 @@ export const Profile = () => {
         <div className={`${styles['main-body']} container`}>
             <UpdateProfile
                 show={showEditProfile}
-                close={onEditClose} 
+                close={onEditClose}
                 onEditProfile={onEditProfile}
             />
             <div className="main-body">
@@ -53,9 +45,9 @@ export const Profile = () => {
                         <div className={`${styles['body']} card`}>
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src={user.imageUrl} alt="profile-pic" className="rounded-circle" width="178" />
+                                    <img src={userImage} alt="profile-pic" className="rounded-circle" width="178" />
                                     <div className="mt-3 text-dark">
-                                        <h3>{user.userName}</h3>
+                                        <h3>{username}</h3>
                                     </div>
                                     <div className="mt-3">
                                         <button className="btn btn-lg btn-primary" onClick={onFavClick}>
@@ -74,7 +66,7 @@ export const Profile = () => {
                                         <h5 className="mb-0">First Name</h5>
                                     </div>
                                     <div className={`${styles['user-info']} col-sm-9`}>
-                                        {user.firstName}
+                                        {firstname}
                                     </div>
                                 </div>
                                 <hr />
@@ -83,7 +75,7 @@ export const Profile = () => {
                                         <h5 className="mb-0">Last Name</h5>
                                     </div>
                                     <div className={`${styles['user-info']} col-sm-9`}>
-                                        {user.lastName}
+                                        {lastname}
                                     </div>
                                 </div>
                                 <hr />
@@ -92,7 +84,7 @@ export const Profile = () => {
                                         <h5 className="mb-0">Email</h5>
                                     </div>
                                     <div className={`${styles['user-info']} col-sm-9`}>
-                                        {user.email}
+                                        {email}
                                     </div>
                                 </div>
                                 <hr />
@@ -101,7 +93,7 @@ export const Profile = () => {
                                         <h5 className="mb-0">Username</h5>
                                     </div>
                                     <div className={`${styles['user-info']} col-sm-9`}>
-                                        {user.userName}
+                                        {username}
                                     </div>
                                 </div>
                                 <hr />
