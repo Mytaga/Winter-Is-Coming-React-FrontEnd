@@ -1,10 +1,13 @@
-import styles from "../Profile/Profile.module.css";
-import { AuthContext } from '../../contexts/AuthContext';
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import * as accountService from "../../services/accountService";
-import { UpdateProfile } from "./UpdateProfile";
+
+import { AuthContext } from '../../contexts/AuthContext';
 import { ProfileContext } from "../../contexts/ProfileContext";
+
+import { UpdateProfile } from "./UpdateProfile";
+import styles from "../Profile/Profile.module.css";
 
 export const Profile = () => {
 

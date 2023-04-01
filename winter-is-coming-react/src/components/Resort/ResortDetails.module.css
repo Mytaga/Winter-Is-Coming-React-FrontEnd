@@ -1,11 +1,13 @@
 .content{
     padding: 40px;
+    background-position: center;
 }
 .header{
     color: black;
     align-items: center;
     display: flex;
     justify-content: center;
+    font-size: 30px;
 }
 
 .main-body{

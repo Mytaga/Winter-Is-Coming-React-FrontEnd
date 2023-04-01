@@ -34,7 +34,7 @@ export const Comment = ({
                         <i className="fas fa-redo-alt ms-2"></i>
                     </button>)}
                 </div>
-                <p className="mb-0">
+                <p className={`${styles['content']} mb-0`}>
                     {content}
                 </p>
             </div>

@@ -11,7 +11,7 @@ export const ProfileProvider = ({
     const [user, setUser] = useState({});
 
     const { userId, token } = useContext(AuthContext);
-
+  
     useEffect(() => {
         accountService.getProfile(userId, token)
             .then(user => {

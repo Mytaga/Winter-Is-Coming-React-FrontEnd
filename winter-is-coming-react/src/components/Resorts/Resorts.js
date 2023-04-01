@@ -26,16 +26,14 @@ export const Resorts = () => {
             .catch(error => console.log(error))
     }, []);
 
-    const onResortFilterSubmit = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-        const searchQuery = formData.search;
-        const country = formData.country;
+    const onResortFilter = async (values) => {
+        
+        const searchQuery = values.searchQuery;
+        const country = values.country;
 
         const filtered = await resortService.getFilteredResorts(searchQuery, country);
 
-        setResorts(state => [...state, filtered]);
+        setResorts(filtered);
     }
 
     const onResortCreate = async (values) => {
@@ -81,7 +79,7 @@ export const Resorts = () => {
                 close={onResortCreateClose}
             />
             <div className={styles['query-options']}>
-                <QueryForm onResortFilterSubmit={onResortFilterSubmit} />
+                <QueryForm onResortFilter={onResortFilter} />
             </div>
             {isAuthenticated && (<div className={styles['add-buttons']}>
                 <button className="btn btn-primary" onClick={onResortCreateClick}>

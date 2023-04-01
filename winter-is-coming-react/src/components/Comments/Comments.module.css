@@ -1,5 +1,9 @@
+.section {
+    position: relative;
+    top: -25px;
+}
 .main {
-    width: 1000px;
+    width: 1200px;
 }
 
 .body{

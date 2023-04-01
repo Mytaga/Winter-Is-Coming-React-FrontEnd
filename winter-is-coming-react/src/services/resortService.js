@@ -7,11 +7,6 @@ export const getResorts = async () => {
     const result = await response.json();
 
     return result.resorts;
-
-    // return fetch(`${baseUrl}/GetAll`)
-    //     .then(res => res.json())
-    //     .then(data => data.resorts)
-    //     .catch(error => console.error(error))
 };
 
 export const getFilteredResorts = async (searchQuery, country) => {
