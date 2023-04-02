@@ -16,7 +16,7 @@ export const Resorts = () => {
     const [showAddPrice, setShowAddPrices] = useState(false);
     const [showAddResort, setShowAddResort] = useState(false);
 
-    const { isAuthenticated, token } = useContext(AuthContext);
+    const { isAuthenticated, token, isAdmin } = useContext(AuthContext);
 
     useEffect(() => {
         resortService.getResorts()
@@ -81,7 +81,7 @@ export const Resorts = () => {
             <div className={styles['query-options']}>
                 <QueryForm onResortFilter={onResortFilter} />
             </div>
-            {isAuthenticated && (<div className={styles['add-buttons']}>
+            {isAuthenticated && isAdmin && (<div className={styles['add-buttons']}>
                 <button className="btn btn-primary" onClick={onResortCreateClick}>
                     Add new resort
                 </button>

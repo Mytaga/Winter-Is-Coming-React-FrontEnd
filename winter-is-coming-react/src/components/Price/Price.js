@@ -1,9 +1,9 @@
 import styles from "../Price/Price.module.css"
 
-function Price({
+export const Price = ({
     passType,
     price,
-}) {
+}) => {
     return (
         <tr className={styles['table-info']}>
             <td>{passType}</td>
@@ -12,4 +12,3 @@ function Price({
     );
 }
 
-export default Price;

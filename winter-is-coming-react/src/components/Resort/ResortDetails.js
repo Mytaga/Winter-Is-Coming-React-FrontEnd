@@ -1,12 +1,15 @@
-import Price from "../Price/Price";
-import styles from "../Resort/ResortDetails.module.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+
 import * as resortService from "../../services/resortService";
-import { CommentCreate } from "../Comment/CommentCreate";
 import * as commentService from '../../services/commentService';
-import { Comments } from "../Comments/Comments";
+
 import { AuthContext } from '../../contexts/AuthContext';
+
+import { CommentCreate } from "../Comment/CommentCreate";
+import { Comments } from "../Comments/Comments";
+import { Price } from "../Price/Price";
+import styles from "../Resort/ResortDetails.module.css";
 
 export function ResortDetails() {
     const { resortId } = useParams();

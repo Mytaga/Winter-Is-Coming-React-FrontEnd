@@ -38,6 +38,8 @@ export const AuthProvider = ({
         navigate('/resorts');
     };
 
+    const adminEmail = 'admin@abv.bg';
+
     const contextValues = {
         onLoginSubmit,
         onRegisterSubmit,
@@ -51,6 +53,7 @@ export const AuthProvider = ({
         lastname: auth.lastName,
         image: auth.image,
         isAuthenticated: !!auth.token,
+        isAdmin: !!adminEmail,
     };
 
     return (
