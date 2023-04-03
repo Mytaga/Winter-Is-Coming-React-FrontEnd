@@ -16,6 +16,14 @@
 }
 
 .form-group{
-    width: 250px;
+    width: 350px;
     margin-right: 10px;
+}
+
+.header{
+    color: #1C2331;
+}
+
+.span {
+    color: #868B94;
 }

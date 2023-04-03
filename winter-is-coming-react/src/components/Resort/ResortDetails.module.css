@@ -48,9 +48,16 @@
 }
 
 .buttons{
-    margin-top:20px;
+    margin-top:5px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e3f2fd;
+    width: 20%;
+    padding: 20px;
+    border-radius: 6px;
     position: relative;
-    left: 800px;
+    left: 700px;
 }
 
 .back-button{

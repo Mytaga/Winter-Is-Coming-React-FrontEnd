@@ -82,10 +82,10 @@ export const Resorts = () => {
                 <QueryForm onResortFilter={onResortFilter} />
             </div>
             {isAuthenticated && isAdmin && (<div className={styles['add-buttons']}>
-                <button className="btn btn-primary" onClick={onResortCreateClick}>
+                <button className="btn btn-lg btn-primary" onClick={onResortCreateClick}>
                     Add new resort
                 </button>
-                <button className="btn btn-primary" onClick={onPriceCreateClick} >
+                <button className="btn btn-lg btn-primary" onClick={onPriceCreateClick} >
                     Add new price
                 </button>
             </div>)}

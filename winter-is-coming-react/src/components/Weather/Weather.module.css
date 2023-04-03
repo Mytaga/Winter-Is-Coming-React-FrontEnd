@@ -1,0 +1,21 @@
+.card {
+    color: #4B515D; 
+    border-radius: 35px;
+    background-color: #e3f2fd;
+}
+
+.div{
+    font-size: 1rem;
+}
+
+.wind{
+    color: #868B94;
+}
+
+.humidity{
+    color: #868B94;
+}
+
+.sun {
+    color: #868B94;
+}

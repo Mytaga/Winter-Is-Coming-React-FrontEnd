@@ -10,6 +10,7 @@ import { CommentCreate } from "../Comment/CommentCreate";
 import { Comments } from "../Comments/Comments";
 import { Price } from "../Price/Price";
 import styles from "../Resort/ResortDetails.module.css";
+import { Weather } from "../Weather/Weather";
 
 export function ResortDetails() {
     const { resortId } = useParams();
@@ -65,6 +66,7 @@ export function ResortDetails() {
                 close={onCommentClose}
             />
             <h2 className={styles['header']}>{resort.countryName} - {resort.name}</h2>
+            <Weather {...resort}/>
             <div className={styles['main-body']}>
                 <div className={styles['body']}>
                     <p>ELEVATION: <strong>{resort.elevation} m</strong></p>

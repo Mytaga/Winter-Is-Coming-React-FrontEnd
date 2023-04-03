@@ -54,7 +54,7 @@ export function QueryForm({
                 </div>
                 <div className="col-md-3">
                     <div className="form-group mt-4 p-2">
-                        <button type="submit" className="btn btn-primary">
+                        <button type="submit" className="btn btn-lg btn-primary">
                             Filter resorts
                         </button>
                     </div>
