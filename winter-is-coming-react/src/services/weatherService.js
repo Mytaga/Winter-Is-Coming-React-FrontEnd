@@ -1,9 +1,9 @@
 const apiKey = 'p4nYBybvF2p9eGaGilTlHf4W2T1kXz7Y';
 const baseUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/1day`;
 
-const weatherInfo = {
-    "Bansko" : '43095',
-    "Borovets" : '51072',
+export const weatherInfo = {
+    Bansko : '43095',
+    Borovets : '51072',
 }
 
 export const getDaily = async(city) => {
@@ -11,5 +11,5 @@ export const getDaily = async(city) => {
 
     const result = await response.json();
 
-    return result.DailyForecasts;
+    return result.DailyForecasts[0];
 }

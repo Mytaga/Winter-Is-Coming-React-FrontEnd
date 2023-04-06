@@ -18,6 +18,7 @@ export function ResortDetails() {
     const [prices, setPrices] = useState([]);
     const [showAddComment, setShowAddComment] = useState(false);
     const [comments, setComments] = useState([]);
+    
     const { isAuthenticated, token, userId, onBackButtonClick } = useContext(AuthContext);
 
     useEffect(() => {
@@ -28,6 +29,8 @@ export function ResortDetails() {
             })
             .catch(error => console.log(error))
     }, [resortId]);
+
+    
 
     useEffect(() => {
         commentService.getResortComments(resortId)

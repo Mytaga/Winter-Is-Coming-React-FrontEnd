@@ -54,7 +54,7 @@ export const AuthProvider = ({
         lastname: auth.lastName,
         image: auth.image,
         isAuthenticated: !!auth.token,
-        isAdmin: !!adminEmail,
+        isAdmin: adminEmail === auth.email,
     };
 
     return (

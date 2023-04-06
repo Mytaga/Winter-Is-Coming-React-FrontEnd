@@ -2,6 +2,7 @@ import './App.css';
 import { Fragment } from 'react';
 import { Route, Routes } from "react-router-dom";
 
+import { RouteGuard } from './components/RouteGuard/RouteGuard';
 import { Home } from './components/Home/Home';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -21,23 +22,39 @@ function App() {
   return (
     <AuthProvider>
       <ProfileProvider>
-      <Fragment>
-        <Header />
-        <main className="main">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/resorts" element={<Resorts />} />
-            <Route path="/myResorts" element={<MyResorts />} />
-            <Route path="/topResorts" element={<TopResorts />} />
-            <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
-          </Routes>
-          <Footer />
-        </main>
-      </Fragment>
+        <Fragment>
+          <Header />
+          <main className="main">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/resorts" element={<Resorts />} />
+              <Route path="/logout" element={
+                <RouteGuard>
+                  <Logout />
+                </RouteGuard>
+              } />
+              <Route path="/profile" element={
+                <RouteGuard>
+                  <Profile />
+                </RouteGuard>
+              } />
+              <Route path="/myResorts" element={
+                <RouteGuard>
+                  <MyResorts />
+                </RouteGuard>
+              } />
+              <Route path="/topResorts" element={
+                <RouteGuard>
+                  <TopResorts />
+                </RouteGuard>
+              } />
+              <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
+            </Routes>
+            <Footer />
+          </main>
+        </Fragment>
       </ProfileProvider>
     </AuthProvider>
   );
