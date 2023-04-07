@@ -1,17 +1,19 @@
-import styles from './Resort.module.css'
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
 import { useContext, useState, useEffect } from 'react';
-import * as likeService from '../../services/likeService';
 
-function Resort({
+import * as likeService from '../../services/likeService';
+import { AuthContext } from '../../contexts/AuthContext';
+
+import styles from './Resort.module.css'
+
+export const Resort = ({
     id,
     name,
     imageUrl,
     elevation,
     countryName,
     likes,
-}) {
+}) => {
 
     const [allLikes, setAllLikes] = useState([]);
     const { isAuthenticated, userId, token } = useContext(AuthContext);
@@ -69,5 +71,3 @@ function Resort({
         </div>
     );
 }
-
-export default Resort

@@ -4,11 +4,11 @@ import { getCountries } from "../../services/resortService";
 import styles from "../Resort/ResortCreate.module.css";
 import { useForm } from "../../hooks/useForm";
 
-function ResortCreate({
+export const ResortCreate = ({
     onResortCreate,
     show,
     close,
-}) {
+}) => {
     const [state, setState] = useState({ data: [], isLoading: false });
 
     useEffect(() => {
@@ -205,5 +205,3 @@ function ResortCreate({
         </Modal>
     );
 }
-
-export default ResortCreate;

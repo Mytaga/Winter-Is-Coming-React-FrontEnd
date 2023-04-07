@@ -25,7 +25,7 @@ export const getCountries = async () => {
     const result = await response.json();
 
     return result;
-}
+};
 
 export const getResortDetails = async (id) =>{
     
@@ -34,7 +34,7 @@ export const getResortDetails = async (id) =>{
     const result = await response.json();
 
     return result;
-}
+};
 
 export const addResort = async(resortData, token) => {
     const response = await fetch(`${baseUrl}/add`, {
@@ -49,7 +49,21 @@ export const addResort = async(resortData, token) => {
     const result = await response.json();
 
     return result;
-}
+};
+
+export const deleteResort = async(resortId, token) => {
+    const response = await fetch(`${baseUrl}/delete/${resortId}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+    });
+
+    const result = await response.json();
+
+    return result;
+};
 
 export const getResortNames = async() => {
     const response = await fetch(`${baseUrl}/getResortNames`);
@@ -57,7 +71,7 @@ export const getResortNames = async() => {
     const result = await response.json();
 
     return result;
-}
+};
 
 export const getMyResorts = async (userId, token) => {
 
@@ -66,7 +80,7 @@ export const getMyResorts = async (userId, token) => {
         headers: {
             'Authorization': `Bearer ${token}`
         }
-    });
+    })
 
     const result = await response.json();
 

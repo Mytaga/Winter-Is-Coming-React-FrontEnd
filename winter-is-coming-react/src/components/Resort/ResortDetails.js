@@ -30,8 +30,6 @@ export function ResortDetails() {
             .catch(error => console.log(error))
     }, [resortId]);
 
-    
-
     useEffect(() => {
         commentService.getResortComments(resortId)
             .then(comments => {
@@ -39,7 +37,6 @@ export function ResortDetails() {
             })
             .catch(error => console.log(error))
     }, [resortId]);
-
 
     const onCommentCreate = async (values) => {
         const result = await commentService.addComment(values, resortId, token);

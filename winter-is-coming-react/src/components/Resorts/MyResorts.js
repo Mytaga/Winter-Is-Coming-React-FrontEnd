@@ -1,8 +1,10 @@
-import Resort from "../Resort/Resort";
-import styles from "./MyResorts.module.css";
 import { useState, useEffect, useContext } from "react";
+
 import * as resortService from '../../services/resortService';
 import { AuthContext } from '../../contexts/AuthContext';
+
+import { Resort } from "../Resort/Resort";
+import styles from "./MyResorts.module.css";
 
 export const MyResorts = () => {
     const [myResorts, setMyResorts] = useState([]);

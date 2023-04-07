@@ -1,7 +1,9 @@
-import Resort from "../Resort/Resort";
-import styles from "./TopResorts.module.css";
 import { useState, useEffect } from "react";
+
 import * as resortService from '../../services/resortService';
+
+import { Resort } from "../Resort/Resort";
+import styles from "./TopResorts.module.css";
 
 export const TopResorts = () => {
     const [topResorts, setTopResorts] = useState([]);
