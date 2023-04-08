@@ -1,0 +1,29 @@
+.label {
+    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.row{
+    display:flex;
+    align-items: center;
+    margin-top:20px;
+    background-color: #e3f2fd;
+    padding: 10px;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.form-group{
+    width: 350px;
+    margin-right: 10px;
+}
+
+.header{
+    color: #1C2331;
+}
+
+.span {
+    color: #868B94;
+}

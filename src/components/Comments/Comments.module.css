@@ -1,0 +1,19 @@
+.section {
+    position: relative;
+    top: -50px;
+}
+.main {
+    width: 1200px;
+}
+
+.body{
+    background-color: #e3f2fd;
+    border-radius: 6px;
+}
+.back-button{
+    margin-top:20px;
+}
+
+.header {
+    padding-bottom: 30px;
+}

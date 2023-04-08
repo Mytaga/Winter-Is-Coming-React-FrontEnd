@@ -1,0 +1,22 @@
+.link-muted {
+    color: #aaa;
+    border: none;
+    background-color: #e3f2fd;;
+}
+
+.link-muted:hover {
+    color: #1266f1;
+}
+
+.comment {
+    width: 600px;
+}
+
+.body {
+    margin-bottom: 30px;
+    border-bottom: 0.5px solid lightblue;
+}
+
+.content {
+    padding-bottom: 15px;
+}

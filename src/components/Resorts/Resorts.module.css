@@ -1,0 +1,24 @@
+.body{
+    padding-bottom: 10rem; 
+}
+
+.cards{
+    margin-top:10px;
+    margin-left:80px;
+}
+
+.query-options{
+    display:flex;
+    justify-content: center;
+}
+
+.add-buttons {
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap:20px;
+}
+
+.add-button{
+    color: white;
+}
