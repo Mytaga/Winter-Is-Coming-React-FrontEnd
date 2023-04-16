@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -11,13 +11,19 @@ export const AuthProvider = ({
 }
 ) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
+    const [ showError, setShowError] = useState(false);
+    const [ errorMessage, setErrorMessage ] = useState('');
+
+    const onErrorClose = () => {
+        setShowError(false);
+    };
 
     const navigate = useNavigate();
 
     const onLogout = async () => {
         await accountService.logout(auth.token);
         setAuth({});
-    }
+    };
 
     const onRegisterSubmit = async (data) => {
         const result = await accountService.register(data);
@@ -25,9 +31,12 @@ export const AuthProvider = ({
         if (result.status === 201) {
             navigate('/login');
         } else if (result.status === 400) {
-            navigate('/register')
+            setErrorMessage('Please fill in all the fields');
+            setShowError(true);
+
         } else {
-            navigate("/registerError")
+            setErrorMessage('Email already exists in the database!');
+            setShowError(true);
         };
     };
 
@@ -35,12 +44,13 @@ export const AuthProvider = ({
         const response = await accountService.login(data);
         
         if(response.status === 200){
-            const result = response.json();
+            const result = await response.json();
             setAuth(result);
             navigate('/');
         }
 
-        navigate('/loginError');
+        setErrorMessage("Credintials don't match!");
+        setShowError(true);
     };
 
     const onBackButtonClick = () => {
@@ -54,6 +64,9 @@ export const AuthProvider = ({
         onRegisterSubmit,
         onLogout,
         onBackButtonClick,
+        onErrorClose,
+        showError,
+        errorMessage,
         setAuth,
         userId: auth.id,
         token: auth.token,

@@ -4,13 +4,13 @@ import { useState, useContext } from 'react';
 import { useForm } from '../../hooks/useForm';
 
 import { AuthContext } from '../../contexts/AuthContext';
-
+import { ErrorToast } from '../Errors/ErrorToast';
 
 import styles from './Register.module.css'
 
 export const Register = () => {
 
-    const { onRegisterSubmit } = useContext(AuthContext);
+    const { onRegisterSubmit, showError, onErrorClose, errorMessage } = useContext(AuthContext);
 
     const [formErrors, setFormErrors] = useState({
         email: '',
@@ -33,6 +33,10 @@ export const Register = () => {
         const value = e.target.value;
         const errors = {};
 
+        if (e.target.name === 'email' && (value === '')) {
+            errors.email = 'Email is required';
+        }
+        
         if (e.target.name === 'firstName' && (value.length < 2 || value.length > 30)) {
             errors.firstName = 'First name should be between 2 and 30 characters';
         }
@@ -50,6 +54,11 @@ export const Register = () => {
 
     return (
         <div className={styles['wrapper']}>
+            <ErrorToast
+                show={showError}
+                close={onErrorClose}
+                errorMessage={errorMessage}
+            />
             <div className={styles['formContent']}>
                 <h2 className={styles['active']}> Register </h2>
                 <form onSubmit={onSubmit} method="POST">

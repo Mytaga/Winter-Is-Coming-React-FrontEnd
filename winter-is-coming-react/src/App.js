@@ -16,8 +16,6 @@ import { MyResorts } from './components/Resorts/MyResorts';
 import { TopResorts } from './components/Resorts/TopResorts';
 import { Header } from './components/Header/Header';
 import { ProfileProvider } from './contexts/ProfileContext';
-import { RegisterError } from './components/Errors/RegisterError';
-import { LoginError } from './components/Errors/LoginError';
 
 function App() {
 
@@ -53,8 +51,6 @@ function App() {
                 </RouteGuard>
               } />
               <Route path="/resorts/:resortId/*" element={<ResortDetails />} />
-              <Route path="/registerError" element={<RegisterError/>}/>
-              <Route path="/loginError" element={<LoginError/>}/>
             </Routes>
             <Footer />
           </main>
