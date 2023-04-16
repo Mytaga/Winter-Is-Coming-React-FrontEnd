@@ -39,6 +39,7 @@ export const ResortDelete = ({
                                 value={formValues.id}
                                 onChange={formChangeHandler}
                             >
+                                <option value="">All</option>
                                 {state.data.map((r) => (<option key={r.id} value={r.id}>{r.name}</option>))}
                             </select>
                         </div>

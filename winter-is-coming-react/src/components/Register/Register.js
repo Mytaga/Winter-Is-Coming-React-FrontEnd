@@ -13,6 +13,7 @@ export const Register = () => {
     const { onRegisterSubmit } = useContext(AuthContext);
 
     const [formErrors, setFormErrors] = useState({
+        email: '',
         firstName: '',
         lastName: '',
         username: '',
@@ -40,7 +41,7 @@ export const Register = () => {
             errors.lastName = 'Last name should be between 2 and 30 characters';
         }
 
-        if (e.target.name === 'usename' && (value.length < 2 || value.length > 50)) {
+        if (e.target.name === 'username' && (value.length < 2 || value.length > 50)) {
             errors.username = 'Username should be between 1 and 50 characters';
         }
 
@@ -60,6 +61,11 @@ export const Register = () => {
                         value={formValues.email}
                         onChange={formChangeHandler}
                         onBlur={formValidate} />
+                    {formErrors.email &&
+                        <p className={`${styles['error']} form-error`}>
+                            {formErrors.email}
+                        </p>
+                    }
                     <input className={styles['fadeIn-sixth']}
                         type="text"
                         id="register"

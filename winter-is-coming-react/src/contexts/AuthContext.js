@@ -20,19 +20,27 @@ export const AuthProvider = ({
     }
 
     const onRegisterSubmit = async (data) => {
-        await accountService.register(data);
-        navigate('/login');
+        const result = await accountService.register(data);
+
+        if (result.status === 201) {
+            navigate('/login');
+        } else if (result.status === 400) {
+            navigate('/register')
+        } else {
+            navigate("/registerError")
+        };
     };
 
     const onLoginSubmit = async (data) => {
-        try {
-            const result = await accountService.login(data);
+        const response = await accountService.login(data);
+        
+        if(response.status === 200){
+            const result = response.json();
             setAuth(result);
-        } catch (error) {
-            console.log('Credentials do not mach!')
+            navigate('/');
         }
 
-        navigate('/');
+        navigate('/loginError');
     };
 
     const onBackButtonClick = () => {

@@ -38,10 +38,9 @@ const Navigation = () => {
                         {isAuthenticated && (<li className="nav-item">
                             <Link to={"/myResorts"} className="nav-link">My Resorts</Link>
                         </li>)}
-
-                        <li className="nav-item">
+                        {isAuthenticated && (   <li className="nav-item">
                             <Link to={"/topResorts"} className="nav-link">Top Resorts</Link>
-                        </li>
+                        </li>)}                     
                     </ul>
                 </div>
                 <div className="d-flex align-items-center">

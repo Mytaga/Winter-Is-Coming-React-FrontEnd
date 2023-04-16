@@ -183,6 +183,7 @@ export const ResortCreate = ({
                                 onChange={formChangeHandler}
                                 onBlur={formValidate}
                             >
+                                <option value="">All</option>
                                 {state.data.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
                             </select>
                             {formErrors.countryId &&

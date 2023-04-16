@@ -14,6 +14,7 @@
 
 .body {
     text-transform: uppercase;
+    background-color: #e3f2fd;
 }
 
 .details-btn {
@@ -24,6 +25,8 @@
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+    border: 0.5px grey solid;
+    border-radius: 10px;
 }
 
 .details-btn i{
@@ -40,22 +43,14 @@
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+    border: 0.5px grey solid;
+    border-radius: 10px;
 }
 
 .like-btn i {
     color: black;
     padding: 10px;
-}
-
-.comment-btn {
-    border-style: none;
-    background-color: #e3f2fd;
-    padding: 5px 20px;
-    border-radius: 6px;
-    margin-left: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
+    
 }
 
 .comment-btn i{
@@ -66,4 +61,6 @@
 .footer {
     font-size: 20px;
     text-transform: uppercase;
+    background-color: #e3f2fd;
+    border-top: 0.5px grey solid;
 }

@@ -47,8 +47,9 @@ export const Resorts = () => {
         setShowAddResort(false);
     };
 
-    const onResortDelete = async (resortId) => {
-        const deletedResort = await resortService.deleteResort(resortId, token);
+    const onResortDelete = async (values) => {
+
+        const deletedResort = await resortService.deleteResort(values.id, token);
 
         setResorts(state => state.filter(r => r.id !== deletedResort.id));
 

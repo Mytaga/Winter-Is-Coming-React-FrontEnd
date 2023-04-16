@@ -27,8 +27,8 @@ export const getCountries = async () => {
     return result;
 };
 
-export const getResortDetails = async (id) =>{
-    
+export const getResortDetails = async (id) => {
+
     const response = await fetch(`${baseUrl}/details/${id}`);
 
     const result = await response.json();
@@ -36,7 +36,7 @@ export const getResortDetails = async (id) =>{
     return result;
 };
 
-export const addResort = async(resortData, token) => {
+export const addResort = async (resortData, token) => {
     const response = await fetch(`${baseUrl}/add`, {
         method: 'POST',
         headers: {
@@ -51,7 +51,7 @@ export const addResort = async(resortData, token) => {
     return result;
 };
 
-export const deleteResort = async(resortId, token) => {
+export const deleteResort = async (resortId, token) => {
     const response = await fetch(`${baseUrl}/delete/${resortId}`, {
         method: 'DELETE',
         headers: {
@@ -65,7 +65,7 @@ export const deleteResort = async(resortId, token) => {
     return result;
 };
 
-export const getResortNames = async() => {
+export const getResortNames = async () => {
     const response = await fetch(`${baseUrl}/getResortNames`);
 
     const result = await response.json();
@@ -90,7 +90,7 @@ export const getMyResorts = async (userId, token) => {
 export const getTopResorts = async () => {
 
     const response = await fetch(`${baseUrl}/topLiked`);
-       
+
     const result = await response.json();
 
     return result.resorts;

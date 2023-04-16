@@ -12,7 +12,6 @@ export const Resort = ({
     imageUrl,
     elevation,
     countryName,
-    likes,
 }) => {
 
     const [allLikes, setAllLikes] = useState([]);
@@ -65,7 +64,7 @@ export const Resort = ({
                     </div>
                 </div>
                 <div className={`${styles['footer']} card-footer`}>
-                    <small className="text-muted"><strong>Likes:</strong> {likes}</small>
+                    <small className="text-muted"><strong>Likes:</strong> {allLikes.length}</small>
                 </div>
             </div>
         </div>

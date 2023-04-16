@@ -89,6 +89,7 @@ function PriceCreate({
                                 onChange={formChangeHandler}
                                 onBlur={priceFormValidate}
                             >
+                                <option value="">All</option>
                                 {state.data.map((c) => (<option key={c.id} value={c.id}>{c.name}</option>))}
                             </select>
                             {priceFormErrors.resortId &&

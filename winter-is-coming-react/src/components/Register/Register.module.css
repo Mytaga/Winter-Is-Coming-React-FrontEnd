@@ -252,3 +252,9 @@ input[type=text]:placeholder {
 * {
   box-sizing: border-box;
 }
+
+.error {
+  color:red;
+  font-family: bold;
+  text-transform: uppercase;
+}

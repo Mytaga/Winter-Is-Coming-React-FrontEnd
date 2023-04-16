@@ -19,6 +19,7 @@
 .header {
     display: flex;
     justify-content: center;
+    background-color:  #e3f2fd;
 }
 
 .title {
@@ -47,7 +48,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 500px;
+    width: 600px;
 }
 
 .input {

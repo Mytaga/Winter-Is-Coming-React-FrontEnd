@@ -8,20 +8,20 @@ export const login = async (userData) => {
         },
         body: JSON.stringify(userData)
     });
-
-    const result = await response.json();
-
-    return result;
+ 
+    return response;
 };
 
 export const register = async (userData) => {
-    await fetch(`${baseUrl}/register`, {
+    const resposnse = await fetch(`${baseUrl}/register`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
         },
         body: JSON.stringify(userData)
     });
+
+    return resposnse;
 };
 
 export const logout = async (token) => {
