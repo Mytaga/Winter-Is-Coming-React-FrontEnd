@@ -11,11 +11,12 @@ export const AuthProvider = ({
 }
 ) => {
     const [auth, setAuth] = useLocalStorage('auth', {});
-    const [ showError, setShowError] = useState(false);
-    const [ errorMessage, setErrorMessage ] = useState('');
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onErrorClose = () => {
         setShowError(false);
+        setErrorMessage('');
     };
 
     const navigate = useNavigate();
@@ -42,8 +43,8 @@ export const AuthProvider = ({
 
     const onLoginSubmit = async (data) => {
         const response = await accountService.login(data);
-        
-        if(response.status === 200){
+
+        if (response.status === 200) {
             const result = await response.json();
             setAuth(result);
             navigate('/');
