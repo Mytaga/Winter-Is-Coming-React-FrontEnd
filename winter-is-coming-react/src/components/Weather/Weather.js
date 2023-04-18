@@ -4,12 +4,12 @@ import * as weatherService from "../../services/weatherService";
 
 import styles from "../Weather/Weather.module.css";
 
-
 export const Weather = ({
     resort,
 }) => {
 
     const [weather, setWeather] = useState({});
+    const iconUrl = '/images/icons/';
 
     useEffect(() => {
         weatherService.getDaily(resort.name)
@@ -46,7 +46,7 @@ export const Weather = ({
                                     </div>
                                 </div>
                                 <div>
-                                    <img src={weather.icon} width="100px" alt="" />
+                                    <img src={`${iconUrl}${weather.icon}.png`} width="100px" alt={weather.icon} />
                                 </div>
                             </div>
                         </div>
