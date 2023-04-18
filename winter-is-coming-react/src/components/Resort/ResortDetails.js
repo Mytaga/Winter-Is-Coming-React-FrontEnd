@@ -42,20 +42,20 @@ export function ResortDetails() {
         const result = await commentService.addComment(values, resortId, token);
         setComments(state => [...state, result]);
         onCommentClose();
-    }
+    };
 
     const onCommentCreateClick = () => {
         setShowAddComment(true);
-    }
+    };
 
     const onCommentClose = () => {
         setShowAddComment(false);
-    }
+    };
 
     const onDeleteClick = async () => {
         var result = await commentService.deleteComment(resortId, userId, token);
         setComments(state => state.filter(c => c.id !== result.id));
-    }
+    };
 
     return (
         <div className={styles['content']}>
@@ -66,7 +66,7 @@ export function ResortDetails() {
                 close={onCommentClose}
             />
             <h2 className={styles['header']}>{resort.countryName} - {resort.name}</h2>
-            <Weather {...resort}/>
+            <Weather resort={resort}/>
             <div className={styles['main-body']}>
                 <div className={styles['body']}>
                     <p>ELEVATION: <strong>{resort.elevation} m</strong></p>
