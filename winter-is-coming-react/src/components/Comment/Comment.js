@@ -9,7 +9,7 @@ export const Comment = ({
     author,
     content,
     publishedOn,
-    authorImageUrl,
+    authorImage,
     onDeleteClick,
     authorId,
 }) => {
@@ -21,7 +21,7 @@ export const Comment = ({
     return (
         <div className={`${styles['body']} d-flex flex-start`}>
             <img className="rounded-circle shadow-1-strong me-3"
-                src={authorImageUrl} alt={author} width="60"
+                src={authorImage} alt={author} width="60"
                 height="60" />
             <div className={styles['comment']}>
                 <h6 className="fw-bold mb-1">{author}</h6>

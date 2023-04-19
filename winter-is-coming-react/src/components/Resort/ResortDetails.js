@@ -40,6 +40,7 @@ export function ResortDetails() {
 
     const onCommentCreate = async (values) => {
         const result = await commentService.addComment(values, resortId, token);
+        console.log(result);
         setComments(state => [...state, result]);
         onCommentClose();
     };

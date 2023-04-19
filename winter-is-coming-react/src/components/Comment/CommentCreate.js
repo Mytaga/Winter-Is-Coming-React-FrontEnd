@@ -10,8 +10,13 @@ export const CommentCreate = ({
     close,
 }) => {
 
-    const { username, userId } = useContext(AuthContext);
-    const { formValues, onSubmit, formChangeHandler } = useForm({ content: '', author: `${username}`, appUserId: `${userId}`}, onCommentCreate);
+    const { username, userId, image } = useContext(AuthContext);
+    const { formValues, onSubmit, formChangeHandler } = useForm({
+        content: '',
+        author: `${username}`,
+        appUserId: `${userId}`,
+        authorImage: `${image}`}, 
+        onCommentCreate);
 
     const [commentFormErrors, setCommentFormErrors] = useState({
         content: '',
