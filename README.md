@@ -10,6 +10,7 @@ React front-end part of the application
  - ASP.NET Identity System /Backend Part/
  - Data Validation, both Client-side and Server-side
  - MDB Bootstrap 5.0
+ - Visual Crossing Weather API
 
 💬 <strong> App Info : </strong> \
  <br />
