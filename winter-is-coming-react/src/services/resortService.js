@@ -1,8 +1,8 @@
-const baseUrl = 'https://localhost:5001/api/Resort'
+const baseUrl = 'https://localhost:5001/api/resorts'
 
 export const getResorts = async () => {
 
-    const response = await fetch(`${baseUrl}/getAll`);
+    const response = await fetch(`${baseUrl}`);
 
     const result = await response.json();
 
@@ -11,7 +11,7 @@ export const getResorts = async () => {
 
 export const getFilteredResorts = async (searchQuery, country) => {
 
-    const response = await fetch(`${baseUrl}/getAll?country=${country}&searchQuery=${searchQuery}`);
+    const response = await fetch(`${baseUrl}/?country=${country}&searchQuery=${searchQuery}`);
 
     const result = await response.json();
 
@@ -20,7 +20,7 @@ export const getFilteredResorts = async (searchQuery, country) => {
 
 export const getCountries = async () => {
 
-    const response = await fetch(`${baseUrl}/loadCountries`);
+    const response = await fetch(`${baseUrl}/countries`);
 
     const result = await response.json();
 
@@ -29,7 +29,7 @@ export const getCountries = async () => {
 
 export const getResortDetails = async (id) => {
 
-    const response = await fetch(`${baseUrl}/details/${id}`);
+    const response = await fetch(`${baseUrl}/${id}`);
 
     const result = await response.json();
 
@@ -37,7 +37,7 @@ export const getResortDetails = async (id) => {
 };
 
 export const addResort = async (resortData, token) => {
-    const response = await fetch(`${baseUrl}/add`, {
+    const response = await fetch(`${baseUrl}`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
@@ -52,7 +52,7 @@ export const addResort = async (resortData, token) => {
 };
 
 export const deleteResort = async (resortId, token) => {
-    const response = await fetch(`${baseUrl}/delete/${resortId}`, {
+    const response = await fetch(`${baseUrl}/${resortId}`, {
         method: 'DELETE',
         headers: {
             'content-type': 'application/json',
@@ -66,7 +66,7 @@ export const deleteResort = async (resortId, token) => {
 };
 
 export const getResortNames = async () => {
-    const response = await fetch(`${baseUrl}/getResortNames`);
+    const response = await fetch(`${baseUrl}/names`);
 
     const result = await response.json();
 
@@ -75,7 +75,7 @@ export const getResortNames = async () => {
 
 export const getMyResorts = async (userId, token) => {
 
-    const response = await fetch(`${baseUrl}/getLiked/${userId}`, {
+    const response = await fetch(`${baseUrl}/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -89,7 +89,7 @@ export const getMyResorts = async (userId, token) => {
 
 export const getTopResorts = async () => {
 
-    const response = await fetch(`${baseUrl}/topLiked`);
+    const response = await fetch(`${baseUrl}/top`);
 
     const result = await response.json();
 

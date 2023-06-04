@@ -1,4 +1,4 @@
-const baseUrl = 'https://localhost:5001/api/Account';
+const baseUrl = 'https://localhost:5001/api/account';
 
 export const login = async (userData) => {
     const response = await fetch(`${baseUrl}/login`, {
@@ -34,7 +34,7 @@ export const logout = async (token) => {
 };
 
 export const getProfile = async (userId, token) => {
-    const response = await fetch(`${baseUrl}/viewProfile/${userId}`, {
+    const response = await fetch(`${baseUrl}/${userId}`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${token}`,
@@ -47,7 +47,7 @@ export const getProfile = async (userId, token) => {
 }
 
 export const editProfile = async (userId, token, userData) => {
-    const response = await fetch(`${baseUrl}/updateProfile/${userId}`, {
+    const response = await fetch(`${baseUrl}/${userId}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',

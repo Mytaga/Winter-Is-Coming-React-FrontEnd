@@ -1,7 +1,7 @@
-const baseUrl = 'https://localhost:5001/api/Like';
+const baseUrl = 'https://localhost:5001/api/like';
 
 export const likeResort = async (resortId, userId, token) => {
-    const response = await fetch(`${baseUrl}/like/${resortId}/${userId}`, {
+    const response = await fetch(`${baseUrl}/${resortId}/${userId}`, {
         method: 'POST',
         headers: {
             'authorization': `Bearer ${token}`,
@@ -14,7 +14,7 @@ export const likeResort = async (resortId, userId, token) => {
 }
 
 export const unlikeResort = async (resortId, userId, token) => {
-    const response = await fetch(`${baseUrl}/unlike/${resortId}/${userId}`, {
+    const response = await fetch(`${baseUrl}/${resortId}/${userId}`, {
         method: 'DELETE',
         headers: {
             'authorization': `Bearer ${token}`,
@@ -29,7 +29,7 @@ export const unlikeResort = async (resortId, userId, token) => {
 
 export const getResortLikes = async(resortId) => {
     
-    const response = await fetch(`${baseUrl}/getResortLikes/${resortId}`)
+    const response = await fetch(`${baseUrl}/${resortId}`)
 
     const result = response.json();
 

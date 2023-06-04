@@ -1,7 +1,7 @@
-const baseUrl = 'https://localhost:5001/api/Price'
+const baseUrl = 'https://localhost:5001/api/price'
 
 export const addPrice = async(priceData, token) => {
-    const response = await fetch(`${baseUrl}/add`, {
+    const response = await fetch(`${baseUrl}`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json',
