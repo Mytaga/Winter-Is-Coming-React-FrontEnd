@@ -1,7 +1,7 @@
 const baseUrl = 'https://localhost:5001/api/comments';
 
 export const getResortComments = async (resortId) => {
-    const response = await fetch(`${baseUrl}/${resortId}`);
+    const response = await fetch(`${baseUrl}/all/${resortId}`);
 
     const result = await response.json();
 

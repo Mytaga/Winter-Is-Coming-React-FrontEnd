@@ -75,7 +75,7 @@ export const getResortNames = async () => {
 
 export const getMyResorts = async (userId, token) => {
 
-    const response = await fetch(`${baseUrl}/${userId}`, {
+    const response = await fetch(`${baseUrl}/mine/${userId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
